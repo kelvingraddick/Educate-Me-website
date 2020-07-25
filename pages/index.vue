@@ -1,97 +1,105 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
+    <v-img
+      src="/hero-1.jpg"
+      gradient="to top, rgba(255,255,255,.33), rgba(255,255,255,1)"
     >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+      <v-container>
+        <div class="text-h5 font-weight-bold mt-15">
+          Changing education | Answering the cry for help
+        </div>
+        <div class="text-h3 font-weight-bold">
+          EDUCATED MINORITIES EDUCATING
+        </div>
+        <div class="text-h6 font-weight-medium mt-15">
+          <span class="darkgrey--text">Looking for a <b>position in education</b>? Let Educate ME help you find your dream school!</span>
+        </div>
+        <v-btn text small v-on:click="searchType = 'job'" class="font-weight-bold mt-3" color="grey">
+          <span :class="searchType == 'job' ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
+        </v-btn>
+        <v-btn text small v-on:click="searchType = 'candidate'" class="font-weight-bold mt-3" color="grey">
+          <span :class="searchType == 'candidate' ? 'black--text' : ''">Find a candidate <v-icon>mdi-account-search</v-icon></span>
+        </v-btn>
+        <v-card
+          class="card d-block mt-2"
+          outlined
+          color="primary"
+        >
+          <v-container>
+            <v-row>
+              <v-col cols="12" md="3">
+                <v-text-field
+                  v-model="searchName"
+                  label="Name"
+                  color="white"
+                  outlined
+                  dense
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-select
+                  :items="searchCategories"
+                  v-model="searchCategory"
+                  label="Category"
+                  color="white"
+                  outlined
+                  dense
+                  required
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-text-field
+                  v-model="searchLocation"
+                  label="Location"
+                  color="white"
+                  outlined
+                  dense
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-btn depressed next class="submit-button font-weight-bold" color="error" height="40">
+                  Search &nbsp;
+                  <v-icon>mdi-database-search</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-container>
+    </v-img>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
-export default {
-  components: {
-    Logo,
-    VuetifyLogo
+  export default {
+    components: {
+    },
+    data: function() {
+      return {
+        searchType: 'job',
+        searchCategories: ["Full-time", "Part-time", "Contract", "Freelance", "Internship"],
+        searchName: undefined,
+        searchCategory: undefined,
+        searchLocation: undefined
+      }
+    }
   }
-}
 </script>
+
+<style lang="scss">
+  .card {
+    width: auto;
+    height: 90px;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 900px) {
+    .card {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
