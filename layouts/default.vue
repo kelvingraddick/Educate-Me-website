@@ -13,16 +13,16 @@
           contain
         ></v-img>
         <v-spacer />
-        <nuxt-link to="/inspire" class="link mx-5">Home</nuxt-link>
-        <nuxt-link to="/inspire" class="link mx-5">About</nuxt-link>
-        <nuxt-link to="/inspire" class="link mx-5">Jobs</nuxt-link>
-        <nuxt-link to="/inspire" class="link mx-5">Canindates</nuxt-link>
-        <nuxt-link to="/inspire" class="link mx-5">Contact</nuxt-link>
-        <v-btn depressed large next to="/inspire" class="font-weight-bold ml-3 mr-1" color="primary">
+        <nuxt-link to="/" class="link mx-5">Home</nuxt-link>
+        <nuxt-link to="/about" class="link mx-5">About</nuxt-link>
+        <nuxt-link to="/jobs" class="link mx-5">Jobs</nuxt-link>
+        <nuxt-link to="/candidates" class="link mx-5">Candidates</nuxt-link>
+        <nuxt-link to="/contact" class="link mx-5">Contact</nuxt-link>
+        <v-btn depressed large next to="/jobs" class="font-weight-bold ml-3 mr-1" color="primary">
           Find a job &nbsp;
           <v-icon>mdi-briefcase-search</v-icon>
         </v-btn>
-        <v-btn depressed large next to="/inspire" class="font-weight-bold ml-1" color="error">
+        <v-btn depressed large next to="/candidates" class="font-weight-bold ml-1" color="error">
           Find a candidate &nbsp;
           <v-icon>mdi-account-search</v-icon>
         </v-btn>

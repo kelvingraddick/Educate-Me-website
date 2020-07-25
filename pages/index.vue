@@ -13,11 +13,11 @@
         <div class="text-h6 font-weight-medium mt-15">
           <span class="darkgrey--text">Looking for a <b>position in education</b>? Let Educate ME help you find your dream school!</span>
         </div>
-        <v-btn text small v-on:click="searchType = 'job'" class="font-weight-bold mt-3" color="grey">
-          <span :class="searchType == 'job' ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
+        <v-btn text small v-on:click="currentSearchType = searchTypes.JOBS" class="font-weight-bold mt-3" color="grey">
+          <span :class="currentSearchType == searchTypes.JOBS ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
         </v-btn>
-        <v-btn text small v-on:click="searchType = 'candidate'" class="font-weight-bold mt-3" color="grey">
-          <span :class="searchType == 'candidate' ? 'black--text' : ''">Find a candidate <v-icon>mdi-account-search</v-icon></span>
+        <v-btn text small v-on:click="currentSearchType = searchTypes.CANDIDATES" class="font-weight-bold mt-3" color="grey">
+          <span :class="currentSearchType == searchTypes.CANDIDATES ? 'black--text' : ''">Find a candidate <v-icon>mdi-account-search</v-icon></span>
         </v-btn>
         <v-card
           class="card d-block mt-2"
@@ -58,7 +58,7 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
-                <v-btn depressed next class="submit-button font-weight-bold" color="error" height="40">
+                <v-btn depressed next :to="'/' + currentSearchType" class="submit-button font-weight-bold" color="error" height="40">
                   Search &nbsp;
                   <v-icon>mdi-database-search</v-icon>
                 </v-btn>
@@ -76,7 +76,11 @@
     },
     data: function() {
       return {
-        searchType: 'job',
+        searchTypes: {
+          JOBS: 'jobs',
+          CANDIDATES: 'candidates'
+        },
+        currentSearchType: 'jobs',
         searchCategories: ["Full-time", "Part-time", "Contract", "Freelance", "Internship"],
         searchName: undefined,
         searchCategory: undefined,
