@@ -9,7 +9,7 @@ sections:
   label: Pages
   create: documents
   match: "**/*"
-  new_doc_ext: vue
+  new_doc_ext: ".vue"
 - type: heading
   label: Pages
 - type: document
