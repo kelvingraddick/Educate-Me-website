@@ -9,10 +9,10 @@
         <v-row>
           <v-col cols="12" md="8" class="d-flex flex-column justify-center">
             <div class="text-h5 font-weight-bold">
-              Changing education | Answering the cry for help
+              {{content['Hero Sub-Title Text']}}
             </div>
             <div class="text-h3 font-weight-bold">
-              EDUCATED MINORITIES EDUCATING
+              {{content['Hero Title Text']}}
             </div>
           </v-col>
           <v-col cols="12" md="4" class="d-flex flex-column justify-center">
@@ -256,11 +256,14 @@
 </template>
 
 <script>
+  import Content from '@/content/pages/home.json';
+
   export default {
     components: {
     },
     data: function() {
       return {
+        content: Content,
         searchTypes: {
           JOBS: 'jobs',
           CANDIDATES: 'candidates'
