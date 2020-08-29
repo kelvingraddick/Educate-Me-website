@@ -17,14 +17,14 @@
         <nuxt-link to="/" class="link d-none d-md-flex mx-4">Home</nuxt-link>
         <nuxt-link to="/about" class="link d-none d-md-flex mx-4">About</nuxt-link>
         <nuxt-link to="/jobs" class="link d-none d-md-flex mx-4">Jobs</nuxt-link>
-        <nuxt-link to="/candidates" class="link d-none d-md-flex mx-4">Candidates</nuxt-link>
+        <nuxt-link to="/educators" class="link d-none d-md-flex mx-4">Educators</nuxt-link>
         <nuxt-link to="/contact" class="link d-none d-md-flex mx-4">Contact</nuxt-link>
         <v-btn depressed large next to="/jobs" class="font-weight-bold d-none d-md-flex ml-3 mr-1" color="primary">
           Find a job &nbsp;
           <v-icon>mdi-briefcase-search</v-icon>
         </v-btn>
-        <v-btn depressed large next to="/candidates" class="font-weight-bold d-none d-md-flex ml-1" color="error">
-          Find a candidate &nbsp;
+        <v-btn depressed large next to="/educators" class="font-weight-bold d-none d-md-flex ml-1" color="error">
+          Find an educator &nbsp;
           <v-icon>mdi-account-search</v-icon>
         </v-btn>
         <v-btn
@@ -51,7 +51,7 @@
         <nuxt-link to="/" class="link white--text mx-4">Home</nuxt-link>
         <nuxt-link to="/about" class="link white--text mx-4">About</nuxt-link>
         <nuxt-link to="/jobs" class="link white--text mx-4">Jobs</nuxt-link>
-        <nuxt-link to="/candidates" class="link white--text mx-4">Candidates</nuxt-link>
+        <nuxt-link to="/educators" class="link white--text mx-4">Educators</nuxt-link>
         <nuxt-link to="/contact" class="link white--text mx-4">Contact</nuxt-link>
         <v-col
           class="black pt-2 text-center white--text"
@@ -82,7 +82,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-icon><v-icon>mdi-chevron-right</v-icon></v-list-item-icon>
-          <v-list-item-content><v-list-item-title><nuxt-link to="/candidates" class="link">Candidates</nuxt-link></v-list-item-title></v-list-item-content>
+          <v-list-item-content><v-list-item-title><nuxt-link to="/educators" class="link">Educators</nuxt-link></v-list-item-title></v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-icon><v-icon>mdi-chevron-right</v-icon></v-list-item-icon>

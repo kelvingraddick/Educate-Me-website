@@ -29,8 +29,8 @@
         <v-btn outlined medium v-on:click="currentSearchType = searchTypes.JOBS" class="font-weight-bold mt-3" color="grey">
           <span :class="currentSearchType == searchTypes.JOBS ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
         </v-btn>
-        <v-btn outlined medium v-on:click="currentSearchType = searchTypes.CANDIDATES" class="font-weight-bold mt-3" color="grey">
-          <span :class="currentSearchType == searchTypes.CANDIDATES ? 'black--text' : ''">Find a candidate <v-icon>mdi-account-search</v-icon></span>
+        <v-btn outlined medium v-on:click="currentSearchType = searchTypes.EDUCATORS" class="font-weight-bold mt-3" color="grey">
+          <span :class="currentSearchType == searchTypes.EDUCATORS ? 'black--text' : ''">Find an educator <v-icon>mdi-account-search</v-icon></span>
         </v-btn>
         <v-card
           class="card d-block mt-2 px-2"
@@ -201,7 +201,7 @@
         </v-col>
         <v-col cols="12" md="6" class="d-flex flex-column justify-center">
           <div class="text-h4 font-weight-bold">
-            CANDIDATES
+            EDUCATORS
           </div>
           <div class="red-bar"></div>
           <v-card
@@ -209,24 +209,24 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(candidate, index) in candidates">
+              <template v-for="(educator, index) in educators">
                 <v-divider
-                  v-if="candidate.divider"
+                  v-if="educator.divider"
                   :key="index"
                   inset
                 ></v-divider>
                 <v-list-item
                   v-else
-                  :key="candidate.id"
+                  :key="educator.id"
                   @click=""
                 >
                   <v-list-item-avatar>
-                    <v-img :src="candidate.imageUrl"></v-img>
+                    <v-img :src="educator.imageUrl"></v-img>
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title v-html="candidate.firstName + ' ' + candidate.lastName" class="font-weight-bold">></v-list-item-title>
-                    <v-list-item-subtitle v-html="candidate.title"></v-list-item-subtitle>
-                    <v-list-item-subtitle v-html="candidate.school + ' ' + candidate.location"></v-list-item-subtitle>
+                    <v-list-item-title v-html="educator.firstName + ' ' + educator.lastName" class="font-weight-bold">></v-list-item-title>
+                    <v-list-item-subtitle v-html="educator.title"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-html="educator.school + ' ' + educator.location"></v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </template>
@@ -266,7 +266,7 @@
         content: Content,
         searchTypes: {
           JOBS: 'jobs',
-          CANDIDATES: 'candidates'
+          EDUCATORS: 'educators'
         },
         currentSearchType: 'jobs',
         searchCategories: ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship'],
@@ -298,7 +298,7 @@
             location: 'Indianapolis, IN'
           }
         ],
-        candidates: [
+        educators: [
           {
             id: 1,
             imageUrl: 'https://www.educatemeleague.com/profiles/359421/view_image/27072390_10210197042194838_3357031736383747174_n.jpg',

@@ -5,7 +5,7 @@
     >
       <v-container>
         <div class="text-h4 font-weight-bold mt-5">
-          CANDIDATES
+          EDUCATORS
         </div>
         <div class="text-h5 mt-5">
           Page coming soon!
