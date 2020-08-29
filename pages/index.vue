@@ -43,6 +43,7 @@
                 v-model="searchName"
                 label="Name"
                 color="white"
+                class="search-text-field"
                 outlined
                 dense
                 required
@@ -54,6 +55,7 @@
                 v-model="searchCategory"
                 label="Category"
                 color="white"
+                class="search-text-field"
                 outlined
                 dense
                 required
@@ -64,6 +66,7 @@
                 v-model="searchLocation"
                 label="Location"
                 color="white"
+                class="search-text-field"
                 outlined
                 dense
                 required
@@ -346,6 +349,12 @@
   .card {
     width: auto;
     height: auto;
+  }
+
+  .search-text-field label,
+  .search-text-field input,
+  .search-text-field input::placeholder {
+    color: white !important;
   }
 
   .submit-button {
