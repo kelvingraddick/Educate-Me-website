@@ -7,17 +7,12 @@ sections:
 - type: document
   path: content/general.json
   label: General
-- type: heading
-  label: Pages
 - type: directory
-  path: pages
+  path: content/pages
   label: Pages
   create: documents
   match: "**/*"
-  new_doc_ext: vue
-- type: document
-  path: pages/index.vue
-  label: Home
+  new_doc_ext: json
 upload_dir: uploads
 public_path: "/uploads"
 front_matter_path: ''
