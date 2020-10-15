@@ -337,7 +337,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .hero-image {
     height: auto;
   }

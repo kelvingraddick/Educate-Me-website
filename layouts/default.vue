@@ -19,7 +19,7 @@
         <nuxt-link to="/jobs" class="link d-none d-md-flex mx-4">Jobs</nuxt-link>
         <nuxt-link to="/educators" class="link d-none d-md-flex mx-4">Educators</nuxt-link>
         <nuxt-link to="/contact" class="link d-none d-md-flex mx-4">Contact</nuxt-link>
-        <v-btn depressed large next to="/jobs" class="font-weight-bold d-none d-md-flex ml-3 mr-1" color="primary">
+        <v-btn depressed large next to="/register" class="font-weight-bold d-none d-md-flex ml-3 mr-1" color="primary">
           Find a job &nbsp;
           <v-icon>mdi-briefcase-search</v-icon>
         </v-btn>
