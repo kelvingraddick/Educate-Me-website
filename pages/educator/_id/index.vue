@@ -21,6 +21,10 @@
           Phone Number: {{educator && educator.phoneNumber }}<br />
           Title: {{educator && educator.title }}<br />
           Bio: {{educator && educator.bio }}<br />
+          <v-btn v-if="isLoggedInEducator" depressed @click="onLogoutButtonClick" class="font-weight-bold mt-4" color="error" height="40">
+            Logout &nbsp;
+            <v-icon>mdi-form</v-icon>
+          </v-btn>
         </v-card>
       </v-container>
   </v-main>
@@ -28,6 +32,7 @@
 
 <script>
   import Content from '@/content/pages/home.json';
+  import Authorize from '@/helpers/authorize.js'
 
   export default {
     components: {
@@ -40,11 +45,12 @@
     },
     computed: {
       isLoggedInEducator: function() {
-        var storedEducator = this.$store.educator;
+        var storedEducator = this.$store.state.educator;
         return storedEducator && storedEducator._id == this.educator?._id;
       }
     },
     mounted: function() {
+      Authorize.trySignIn(this.$store);
     },
 		async asyncData({ params }) {
 			return fetch('http://api.educateme.wavelinkllc.com/educator/' + params.id, { method: 'GET' })
@@ -65,6 +71,12 @@
 				});
 		},
     methods: {
+      async onLogoutButtonClick() {
+        localStorage.removeItem('TOKEN'); // TODO: remove in use refresh_token flow
+        this.$store.commit('setToken', undefined);
+        this.$store.commit('setEducator', undefined);
+        this.$router.push({ path: '/' });
+      }
     }
   }
 </script>
