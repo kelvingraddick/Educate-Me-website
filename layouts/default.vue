@@ -89,6 +89,14 @@
           <v-list-item-content><v-list-item-title><nuxt-link to="/contact" class="link">Contact</nuxt-link></v-list-item-title></v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-btn depressed large next to="/register" class="font-weight-bold d-flex mx-6 mb-2" color="primary">
+        Find a job &nbsp;
+        <v-icon>mdi-briefcase-search</v-icon>
+      </v-btn>
+      <v-btn depressed large next to="/educators" class="font-weight-bold d-flex mx-6" color="error">
+        Find an educator &nbsp;
+        <v-icon>mdi-account-search</v-icon>
+      </v-btn>
     </v-navigation-drawer>
   </v-app>
 </template>
