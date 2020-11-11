@@ -4,7 +4,7 @@
         <v-row>
           <v-col cols="12" md="6" class="d-flex flex-column justify-center">
             <div class="text-h4 font-weight-bold mt-5">
-              SIGN IN
+              {{this.$route.params.sso}} SIGN IN
             </div>
             <div class="text-h6 font-weight-medium mt-2">
               <span class="darkgrey--text">Welcome back to the Educate ME platform! <b>Sign in</b> below:</span>
@@ -110,7 +110,13 @@
               this.$store.commit('setToken', response.token);
               this.$store.commit('setEducator', response.educator);
               localStorage.setItem('TOKEN', response.token); // TODO: remove in use refresh_token flow
-              this.$router.push({ path: '/educator/' + response.educator._id });
+              if (this.$route.params.sso == 'bevy' && // Bevy login flow 
+                  this.$route.query.redirect_url &&
+                  response.ssoToken) {
+                window.location.href = this.$route.query.redirect_url + "?sso_token=" + response.ssoToken + "&sso_auth_status=ok";
+              } else { // Default/EducateME login flow
+                this.$router.push({ path: '/educator/' + response.educator._id });
+              }
             } else {
               window.alert(response.errorMessage);
               this.isProcessing = false;
@@ -128,7 +134,9 @@
           identityType: "educateme",
           userType: this.currentSignInType,
           emailAddress: this.emailAddress,
-          password: this.password
+          password: this.password,
+          ssoSource: this.$route.params.sso || 'educateme',
+          ssoToken: this.$route.query.token
         };
         return fetch('http://api.educateme.wavelinkllc.com/educator/authenticate', {
           method: 'POST',
