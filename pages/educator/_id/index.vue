@@ -2,30 +2,61 @@
   <v-main>
       <v-container>
         <v-row>
-          <v-col cols="12" md="6" class="d-flex flex-column justify-center">
-            <div class="text-h4 font-weight-bold mt-5">
-              {{educator && educator.name && educator.name.first}} {{educator && educator.name && educator.name.last }}
-            </div>
-            <div v-if="isLoggedInEducator" class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">You are logged in as this <b>educator</b> (demo page)</span>
-            </div>
+          <v-col cols="12" md="4">
+            <v-card outlined>
+              <v-img
+                height="250"
+                :src="userImageUrl"
+              ></v-img>
+              <v-card-title class="text-h5 font-weight-bold">{{educator && educator.name && educator.name.first}} {{educator && educator.name && educator.name.last }} {{ isLoggedInEducator ? '(You)' : ''}}</v-card-title>
+              <v-card-text>
+                <div class="h6 font-weight-bold">{{educator && educator.title}}</div>
+                <div></div>
+              </v-card-text>
+              <v-divider class="mx-4"></v-divider>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="onLinkedInButtonClick"
+                >
+                  <v-icon>mdi-email</v-icon>&nbsp;Contact
+                </v-btn>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="onLinkedInButtonClick"
+                >
+                  <v-icon>mdi-file-document</v-icon>&nbsp;Resume
+                </v-btn>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="onLinkedInButtonClick"
+                >
+                  <v-icon>mdi-linkedin</v-icon>&nbsp;LinkedIn
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="8">
+            <v-card
+              class="card d-block"
+              outlined
+            >
+              <v-card-title class="">Bio</v-card-title>
+              <v-card-subtitle class="">{{educator && educator.bio}}</v-card-subtitle>
+              <v-card-title class="">Email Address</v-card-title>
+              <v-card-subtitle class="">{{educator && educator.emailAddress}}</v-card-subtitle>
+              <v-card-title class="">Phone Number</v-card-title>
+              <v-card-subtitle class="">{{educator && educator.phoneNumber}}</v-card-subtitle>
+              <v-btn v-if="isLoggedInEducator" depressed @click="onLogoutButtonClick" class="font-weight-bold ma-4" color="error" height="40">
+                Logout &nbsp;
+                <v-icon>mdi-form</v-icon>
+              </v-btn>
+            </v-card>
           </v-col>
         </v-row>
-        <v-card
-          class="card d-block mt-4 pa-4"
-          outlined
-        >
-					First name: {{educator && educator.name && educator.name.first}}<br />
-					Last name: {{educator && educator.name && educator.name.last }}<br />
-          Email Address: {{educator && educator.emailAddress }}<br />
-          Phone Number: {{educator && educator.phoneNumber }}<br />
-          Title: {{educator && educator.title }}<br />
-          Bio: {{educator && educator.bio }}<br />
-          <v-btn v-if="isLoggedInEducator" depressed @click="onLogoutButtonClick" class="font-weight-bold mt-4" color="error" height="40">
-            Logout &nbsp;
-            <v-icon>mdi-form</v-icon>
-          </v-btn>
-        </v-card>
       </v-container>
   </v-main>
 </template>
@@ -47,6 +78,10 @@
       isLoggedInEducator: function() {
         var storedEducator = this.$store.state.educator;
         return storedEducator && storedEducator._id == this.educator?._id;
+      },
+      userImageUrl: function() {
+        var storedEducator = this.$store.state.educator;
+        return (storedEducator && storedEducator.imageUrl) || '/placeholder-user.png';
       }
     },
     mounted: function() {
@@ -76,6 +111,9 @@
         this.$store.commit('setToken', undefined);
         this.$store.commit('setEducator', undefined);
         this.$router.push({ path: '/' });
+      },
+      async onLinkedInButtonClick() {
+
       }
     }
   }
