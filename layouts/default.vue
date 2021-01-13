@@ -19,11 +19,11 @@
         <nuxt-link to="/jobs" class="link d-none d-md-flex mx-4">Jobs</nuxt-link>
         <nuxt-link to="/educators" class="link d-none d-md-flex mx-4">Educators</nuxt-link>
         <nuxt-link to="/contact" class="link d-none d-md-flex mx-4">Contact</nuxt-link>
-        <v-btn depressed large next to="/register" class="font-weight-bold d-none d-md-flex ml-3 mr-1" color="primary">
+        <v-btn depressed large next to="/register/educator" class="font-weight-bold d-none d-md-flex ml-3 mr-1" color="primary">
           Find a job &nbsp;
           <v-icon>mdi-briefcase-search</v-icon>
         </v-btn>
-        <v-btn depressed large next to="/educators" class="font-weight-bold d-none d-md-flex ml-1" color="error">
+        <v-btn depressed large next to="/register/employer" class="font-weight-bold d-none d-md-flex ml-1" color="error">
           Find an educator &nbsp;
           <v-icon>mdi-account-search</v-icon>
         </v-btn>
@@ -89,11 +89,11 @@
           <v-list-item-content><v-list-item-title><nuxt-link to="/contact" class="link">Contact</nuxt-link></v-list-item-title></v-list-item-content>
         </v-list-item>
       </v-list>
-      <v-btn depressed large next to="/register" class="font-weight-bold d-flex mx-6 mb-2" color="primary">
+      <v-btn depressed large next to="/register/educator" class="font-weight-bold d-flex mx-6 mb-2" color="primary">
         Find a job &nbsp;
         <v-icon>mdi-briefcase-search</v-icon>
       </v-btn>
-      <v-btn depressed large next to="/educators" class="font-weight-bold d-flex mx-6" color="error">
+      <v-btn depressed large next to="/register/employer" class="font-weight-bold d-flex mx-6" color="error">
         Find an educator &nbsp;
         <v-icon>mdi-account-search</v-icon>
       </v-btn>

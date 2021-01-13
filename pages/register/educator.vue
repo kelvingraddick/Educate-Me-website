@@ -4,13 +4,14 @@
         <v-row>
           <v-col cols="12" md="6" class="d-flex flex-column justify-center">
             <div class="text-h4 font-weight-bold mt-5">
-              {{this.$route.params.sso}} SIGN IN
+              REGISTER
             </div>
             <div class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">Welcome back to the Educate ME platform! <b>Sign in</b> below:</span>
+              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register as an eductor</span>
             </div>
             <div class="text-h7 font-weight-medium mt-2">
-              <span class="darkgrey--text">Don't have an account yet? <nuxt-link to="/register">Register instead</nuxt-link>.</span>
+              <span class="darkgrey--text">Already have an account? <nuxt-link to="/signin/educator">Sign in instead</nuxt-link>.</span><br />
+              <span class="darkgrey--text">Are you an employer? <nuxt-link to="/register/employer">Register as an employer instead</nuxt-link>.</span>
             </div>
           </v-col>
           <v-col cols="12" md="6" class="d-flex flex-column justify-center">
@@ -21,14 +22,6 @@
             />
           </v-col>
         </v-row>
-        <v-btn outlined medium v-on:click="currentSignInType = signInTypes.EDUCATOR" class="font-weight-bold mt-8" color="grey">
-          <span :class="currentSignInType == signInTypes.EDUCATOR ? 'black--text' : ''">Sign in as an educator <v-icon>mdi-briefcase-search</v-icon></span>
-        </v-btn>
-        <!--
-        <v-btn outlined medium v-on:click="currentSignInType = signInTypes.EMPLOYER" class="font-weight-bold mt-8" color="grey">
-          <span :class="currentSignInType == signInTypes.EMPLOYER ? 'black--text' : ''">Sign in as an employer/school <v-icon>mdi-account-search</v-icon></span>
-        </v-btn>
-        -->
         <v-card
           class="card d-block mt-4 pa-4"
           outlined
@@ -39,7 +32,23 @@
             lazy-validation
           >
             <v-text-field
-              v-model="emailAddress"
+              v-model="educator.firstName"
+              :rules="nameValidationRules"
+              label="First name"
+              outlined
+              dense
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="educator.lastName"
+              :rules="nameValidationRules"
+              label="Last name"
+              outlined
+              dense
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="educator.emailAddress"
               :rules="emailAddressValidationRules"
               label="Email address"
               outlined
@@ -47,7 +56,14 @@
               required
             ></v-text-field>
             <v-text-field
-              v-model="password"
+              v-model="educator.phoneNumber"
+              :rules="phoneNumberValidationRules"
+              label="Phone number"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="educator.password"
               :rules="passwordValidationRules"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
@@ -57,8 +73,20 @@
               required
               @click:append="showPassword = !showPassword"
             ></v-text-field>
-            <v-btn depressed @click="onSignInButtonClick" class="font-weight-bold" color="error" height="40">
-              SignIn &nbsp;
+            <v-text-field
+              v-model="educator.title"
+              label="Title"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="educator.bio"
+              label="Bio"
+              outlined
+              dense
+            ></v-text-field>
+            <v-btn depressed @click="onRegisterButtonClick" class="font-weight-bold" color="error" height="40">
+              Register &nbsp;
               <v-icon>mdi-form</v-icon>
             </v-btn>
           </v-form>
@@ -78,20 +106,34 @@
   export default {
     components: {
     },
+    props: {
+      registrationType: String
+    },
     data: function() {
       return {
         content: Content,
-        signInTypes: {
-          EDUCATOR: 'educator',
-          EMPLOYER: 'employer'
+        educator: {
+          firstName: undefined,
+          lastName: undefined,
+          emailAddress: undefined,
+          phoneNumber: undefined,
+          password: undefined,
+          title: undefined,
+          bio: undefined,
+          imageUrl: undefined
         },
-        currentSignInType: 'educator',
-        emailAddress: undefined,
-        password: undefined,
         showPassword: false,
+        nameValidationRules: [
+          v => !!v || 'First and last names are required',
+          v => (v && v.length < 10) || 'First and last names must be no greater than 10 characters each',
+        ],
         emailAddressValidationRules: [
           v => !!v || 'Email address is required',
           v => /.+@.+\..+/.test(v) || 'Email address must be valid',
+        ],
+        phoneNumberValidationRules: [
+          v => (!v || (v.length >= 10 && v.length <= 11)) || 'Password must within 10 to 11 characters in length',
+          v => (!v || Number.isInteger(Number(v))) || "The value must be an integer number"
         ],
         passwordValidationRules: [
           v => !!v || 'Password is required',
@@ -101,44 +143,32 @@
       }
     },
     methods: {
-      async onSignInButtonClick() {
+      async onRegisterButtonClick() {
         if (this.$refs.form.validate()) {
           this.isProcessing = true;
-          var response = await this.signIn();
+          var response = await this.register();
           if (response) {
             if (response.isSuccess) {
               this.$store.commit('setToken', response.token);
               this.$store.commit('setEducator', response.educator);
-              localStorage.setItem('TOKEN', response.token); // TODO: remove in use refresh_token flow
-              if (this.$route.params.sso == 'bevy' && // Bevy login flow 
-                  this.$route.query.redirect_url &&
-                  response.ssoToken) {
-                window.location.href = this.$route.query.redirect_url + "?sso_token=" + response.ssoToken + "&sso_auth_status=ok";
-              } else { // Default/EducateME login flow
-                this.$router.push({ path: '/educator/' + response.educator._id });
-              }
+              this.$store.commit('setEmployer', undefined);
+              localStorage.setItem('TOKEN', response.token);
+              this.$router.push({ path: '/educator/' + response.educator._id });
             } else {
               window.alert(response.errorMessage);
               this.isProcessing = false;
             }
           } else {
-            var errorMessage = "There was an error signing in." + " Please update entries and try again";
+            var errorMessage = "There was an error signing up." + " Please update entries and try again";
             window.alert(errorMessage);
             this.isProcessing = false;
           }
         }
         return false;
       },
-      async signIn() {
-        var body = {
-          identityType: "educateme",
-          userType: this.currentSignInType,
-          emailAddress: this.emailAddress,
-          password: this.password,
-          ssoSource: this.$route.params.sso || 'educateme',
-          ssoToken: this.$route.query.token
-        };
-        return fetch('http://api.educateme.wavelinkllc.com/educator/authenticate', {
+      async register() {
+        var body = this.educator;
+        return fetch('http://api.educateme.wavelinkllc.com/educator/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

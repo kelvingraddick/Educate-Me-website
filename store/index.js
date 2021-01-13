@@ -1,6 +1,7 @@
 export const state = () => ({
 	token: undefined,
-	educator: undefined
+  educator: undefined,
+  employer: undefined
 })
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
 	},
 	setEducator(state, educator) {
     state.educator = educator;
+  },
+  setEmployer(state, employer) {
+    state.employer = employer;
 	},
 }

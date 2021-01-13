@@ -7,10 +7,11 @@
               REGISTER
             </div>
             <div class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register</span>
+              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register as an employer</span>
             </div>
             <div class="text-h7 font-weight-medium mt-2">
-              <span class="darkgrey--text">Already have an account? <nuxt-link to="/signin">Sign in instead</nuxt-link>.</span>
+              <span class="darkgrey--text">Already have an account? <nuxt-link to="/signin/employer">Sign in instead</nuxt-link>.</span><br />
+              <span class="darkgrey--text">Are you an educator? <nuxt-link to="/register/educator">Register as an educator instead</nuxt-link>.</span>
             </div>
           </v-col>
           <v-col cols="12" md="6" class="d-flex flex-column justify-center">
@@ -21,14 +22,6 @@
             />
           </v-col>
         </v-row>
-        <v-btn outlined medium v-on:click="currentRegistrationType = registrationTypes.EDUCATOR" class="font-weight-bold mt-8" color="grey">
-          <span :class="currentRegistrationType == registrationTypes.EDUCATOR ? 'black--text' : ''">Register as an educator <v-icon>mdi-briefcase-search</v-icon></span>
-        </v-btn>
-        <!--
-        <v-btn outlined medium v-on:click="currentRegistrationType = registrationTypes.EMPLOYER" class="font-weight-bold mt-8" color="grey">
-          <span :class="currentRegistrationType == registrationTypes.EMPLOYER ? 'black--text' : ''">Register as an employer/school <v-icon>mdi-account-search</v-icon></span>
-        </v-btn>
-        -->
         <v-card
           class="card d-block mt-4 pa-4"
           outlined
@@ -39,23 +32,15 @@
             lazy-validation
           >
             <v-text-field
-              v-model="educator.firstName"
+              v-model="employer.name"
               :rules="nameValidationRules"
-              label="First name"
+              label="Name"
               outlined
               dense
               required
             ></v-text-field>
             <v-text-field
-              v-model="educator.lastName"
-              :rules="nameValidationRules"
-              label="Last name"
-              outlined
-              dense
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="educator.emailAddress"
+              v-model="employer.emailAddress"
               :rules="emailAddressValidationRules"
               label="Email address"
               outlined
@@ -63,14 +48,14 @@
               required
             ></v-text-field>
             <v-text-field
-              v-model="educator.phoneNumber"
+              v-model="employer.phoneNumber"
               :rules="phoneNumberValidationRules"
               label="Phone number"
               outlined
               dense
             ></v-text-field>
             <v-text-field
-              v-model="educator.password"
+              v-model="employer.password"
               :rules="passwordValidationRules"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
@@ -81,13 +66,43 @@
               @click:append="showPassword = !showPassword"
             ></v-text-field>
             <v-text-field
-              v-model="educator.title"
-              label="Title"
+              v-model="employer.website"
+              label="Website"
               outlined
               dense
             ></v-text-field>
             <v-text-field
-              v-model="educator.bio"
+              v-model="employer.addressLine1"
+              label="Address (line 1)"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="employer.addressLine2"
+              label="Address (line 2)"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="employer.city"
+              label="City"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="employer.state"
+              label="State"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="employer.zipCode"
+              label="Zip code"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              v-model="employer.bio"
               label="Bio"
               outlined
               dense
@@ -113,28 +128,30 @@
   export default {
     components: {
     },
+    props: {
+      registrationType: String
+    },
     data: function() {
       return {
         content: Content,
-        registrationTypes: {
-          EDUCATOR: 'educator',
-          EMPLOYER: 'employer'
-        },
-        currentRegistrationType: 'educator',
-        educator: {
-          firstName: undefined,
-          lastName: undefined,
+        employer: {
+          name: undefined,
           emailAddress: undefined,
           phoneNumber: undefined,
           password: undefined,
-          title: undefined,
+          website: undefined,
+          addressLine1: undefined,
+          addressLine2: undefined,
+          city: undefined,
+          state: undefined,
+          zipCode: undefined,
           bio: undefined,
           imageUrl: undefined
         },
         showPassword: false,
         nameValidationRules: [
-          v => !!v || 'First and last names are required',
-          v => (v && v.length < 10) || 'First and last names must be no greater than 10 characters each',
+          v => !!v || 'Name is required',
+          v => (v && v.length < 50) || 'Names must be no greater than 50 characters',
         ],
         emailAddressValidationRules: [
           v => !!v || 'Email address is required',
@@ -159,9 +176,10 @@
           if (response) {
             if (response.isSuccess) {
               this.$store.commit('setToken', response.token);
-              this.$store.commit('setEducator', response.educator);
-              localStorage.setItem('TOKEN', response.token); // TODO: remove in use refresh_token flow
-              this.$router.push({ path: '/educator/' + response.educator._id });
+              this.$store.commit('setEmployer', response.employer);
+              this.$store.commit('setEducator', undefined);
+              localStorage.setItem('TOKEN', response.token);
+              this.$router.push({ path: '/employer/' + response.employer._id });
             } else {
               window.alert(response.errorMessage);
               this.isProcessing = false;
@@ -175,8 +193,8 @@
         return false;
       },
       async register() {
-        var body = this.educator;
-        return fetch('http://api.educateme.wavelinkllc.com/educator/register', {
+        var body = this.employer;
+        return fetch('http://api.educateme.wavelinkllc.com/employer/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

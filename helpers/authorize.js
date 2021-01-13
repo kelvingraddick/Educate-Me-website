@@ -1,16 +1,27 @@
-var trySignIn = async function(store) {
-  var token = localStorage.getItem('TOKEN'); // TODO: remove in use refresh_token flow
+var tryEducatorSignIn = async function(store) {
+  var token = localStorage.getItem('TOKEN');
   if (token) {
     store.commit('setToken', token);
-    var response = await _signIn(token);
+    var response = await _signIn('educator', token);
     if (response) {
       store.commit('setEducator', response.educator);
     }
   }
 }
 
-var _signIn = async function(token) {
-	return fetch('http://api.educateme.wavelinkllc.com/educator/authorize', {
+var tryEmployerSignIn = async function(store) {
+  var token = localStorage.getItem('TOKEN');
+  if (token) {
+    store.commit('setToken', token);
+    var response = await _signIn('employer', token);
+    if (response) {
+      store.commit('setEmployer', response.employer);
+    }
+  }
+}
+
+var _signIn = async function(userType, token) {
+	return fetch('http://api.educateme.wavelinkllc.com/' + userType + '/authorize', {
 		method: 'POST',
 		headers: { 'Authorization': 'Bearer ' + token }
 	})
@@ -32,5 +43,6 @@ var _signIn = async function(token) {
 };
 
 export default {
-  trySignIn: trySignIn
+  tryEducatorSignIn: tryEducatorSignIn,
+  tryEmployerSignIn: tryEmployerSignIn
 }
