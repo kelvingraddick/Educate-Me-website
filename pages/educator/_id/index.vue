@@ -6,7 +6,7 @@
             <v-card outlined>
               <v-img
                 height="250"
-                :src="userImageUrl"
+                :src="educator.imageUrl || '/placeholder-user.png'"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{educator && educator.name && educator.name.first}} {{educator && educator.name && educator.name.last }} {{ isLoggedInEducator ? '(You)' : ''}}</v-card-title>
               <v-card-text>
@@ -78,10 +78,6 @@
       isLoggedInEducator: function() {
         var storedEducator = this.$store.state.educator;
         return storedEducator && storedEducator._id == this.educator?._id;
-      },
-      userImageUrl: function() {
-        var storedEducator = this.$store.state.educator;
-        return (storedEducator && storedEducator.imageUrl) || '/placeholder-user.png';
       }
     },
     mounted: function() {
