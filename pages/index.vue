@@ -40,8 +40,8 @@
           <v-row>
             <v-col cols="12" md="3">
               <v-text-field
-                v-model="searchName"
-                label="Name"
+                v-model="searchTitle"
+                label="Job title"
                 color="white"
                 class="search-text-field"
                 outlined
@@ -49,7 +49,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="3" v-show="currentSearchType == searchTypes.JOBS">
               <v-select
                 :items="searchCategories"
                 v-model="searchCategory"
@@ -212,24 +212,23 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(educator, index) in educators">
+              <template v-for="(educator, index) in educators.sort(() => 0.5 - Math.random()).slice(0, 3)">
                 <v-divider
-                  v-if="educator.divider"
+                  v-if="index > 0"
                   :key="index"
                   inset
                 ></v-divider>
                 <v-list-item
-                  v-else
-                  :key="educator.id"
-                  @click=""
+                  :key="educator._id"
+                  @click="navigate('/educator/' + educator._id)"
                 >
                   <v-list-item-avatar>
-                    <v-img :src="educator.imageUrl"></v-img>
+                    <v-img :src="educator.imageUrl || '/placeholder-user.png'"></v-img>
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title v-html="educator.firstName + ' ' + educator.lastName" class="font-weight-bold">></v-list-item-title>
+                    <v-list-item-title v-html="educator.name && (educator.name.first + ' ' + educator.name.last)" class="font-weight-bold">></v-list-item-title>
                     <v-list-item-subtitle v-html="educator.title"></v-list-item-subtitle>
-                    <v-list-item-subtitle v-html="educator.school + ' ' + educator.location"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-html="(educator.locations && educator.locations[0]) || ''"></v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </template>
@@ -273,7 +272,7 @@
         },
         currentSearchType: 'jobs',
         searchCategories: ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship'],
-        searchName: undefined,
+        searchTitle: undefined,
         searchCategory: undefined,
         searchLocation: undefined,
         jobs: [
@@ -301,37 +300,30 @@
             location: 'Indianapolis, IN'
           }
         ],
-        educators: [
-          {
-            id: 1,
-            imageUrl: 'https://www.educatemeleague.com/profiles/359421/view_image/27072390_10210197042194838_3357031736383747174_n.jpg',
-            firstName: 'Samuel',
-            lastName: 'Baker',
-            title: 'Certified Teacher',
-            school: 'Kipp Nashville College Prep Elementary',
-            location: 'Nashville, TN'
-          },
-          { divider: true, inset: true },
-          {
-            id: 2,
-            imageUrl: 'https://www.educatemeleague.com/profiles/354254/view_image/blake-nathan.jpg',
-            firstName: 'Blake',
-            lastName: 'Nathan',
-            title: 'Technology Education Teacher',
-            school: 'Stonybrook Middle School',
-            location: 'Indianapolis, IN'
-          },
-          { divider: true, inset: true },
-          {
-            id: 3,
-            imageUrl: 'https://www.educatemeleague.com/profiles/1072337/view_image/headshot.JPG',
-            firstName: 'Lyric Campbell',
-            lastName: 'Lyric Campbell',
-            title: 'Supplemental Instructor',
-            school: ' Fl Am University Developmental Studies Program',
-            location: 'Tallahassee, FL'
-          }
-        ],
+        educators: undefined
+      }
+    },
+    async asyncData({ params }) {
+			return fetch('http://api.educateme.wavelinkllc.com/educators/', { method: 'GET' })
+				.then((response) => { 
+					if (response.status == 200) {
+						return response.json()
+						.then((responseJson) => {
+							if (responseJson.isSuccess) {
+								return { educators: responseJson.educators };
+							}
+						})
+					}
+					return undefined;
+				})
+				.catch((error) => {
+					console.error(error);
+					return undefined;
+				});
+    },
+    methods: {
+      async navigate(path) {
+        this.$router.push({ path: path });
       }
     }
   }
