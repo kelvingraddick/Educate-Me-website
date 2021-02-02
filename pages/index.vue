@@ -181,13 +181,12 @@
               <template v-for="(job, index) in jobs">
                 <v-divider
                   v-if="job.divider"
-                  :key="index"
+                  :key="job.id + '-divider'"
                   inset
                 ></v-divider>
                 <v-list-item
                   v-else
                   :key="job.id"
-                  @click=""
                 >
                   <v-list-item-avatar>
                     <v-img :src="job.imageUrl"></v-img>
@@ -212,10 +211,10 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(educator, index) in educators.sort(() => 0.5 - Math.random()).slice(0, 3)">
+              <template v-for="(educator, index) in educators.slice().sort(() => 0.5 - Math.random()).slice(0, 3)">
                 <v-divider
                   v-if="index > 0"
-                  :key="index"
+                  :key="educator._id + '-divider'"
                   inset
                 ></v-divider>
                 <v-list-item
@@ -283,17 +282,17 @@
             school: 'Allegiant Prep',
             location: 'Indianapolis, IN'
           },
-          { divider: true, inset: true },
+          { id: 2, divider: true, inset: true },
           {
-            id: 2,
+            id: 3,
             imageUrl: 'https://www.educatemeleague.com/uploads/job/logo/32891806/thumb_allegiant.png',
             title: 'Second Grade Teacher',
             school: 'Allegiant Prep',
             location: 'Indianapolis, IN'
           },
-          { divider: true, inset: true },
+          { id: 4, divider: true, inset: true },
           {
-            id: 3,
+            id: 5,
             imageUrl: 'https://www.educatemeleague.com/uploads/job/logo/32891806/thumb_allegiant.png',
             title: 'Founding Third Grade Teacher',
             school: 'Allegiant Prep',
