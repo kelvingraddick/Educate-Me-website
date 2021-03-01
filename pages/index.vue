@@ -189,12 +189,12 @@
                   :key="job.id"
                 >
                   <v-list-item-avatar>
-                    <v-img :src="job.imageUrl"></v-img>
+                    <v-img :src="job.imageUrl || '/placeholder-user.png'"></v-img>
                   </v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title v-html="job.title" class="font-weight-bold"></v-list-item-title>
-                    <v-list-item-subtitle v-html="job.school"></v-list-item-subtitle>
-                    <v-list-item-subtitle v-html="job.location"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-html="job.type"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-html="(job.categories && job.categories[0]) || ''"></v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </template>
@@ -258,6 +258,8 @@
 
 <script>
   import Content from '@/content/pages/home.json';
+  import Educators from '@/helpers/educators.js';
+  import Jobs from '@/helpers/jobs.js';
 
   export default {
     components: {
@@ -274,51 +276,14 @@
         searchTitle: undefined,
         searchCategory: undefined,
         searchLocation: undefined,
-        jobs: [
-          {
-            id: 1,
-            imageUrl: 'https://www.educatemeleague.com/uploads/job/logo/32891806/thumb_allegiant.png',
-            title: 'First Grade Teacher',
-            school: 'Allegiant Prep',
-            location: 'Indianapolis, IN'
-          },
-          { id: 2, divider: true, inset: true },
-          {
-            id: 3,
-            imageUrl: 'https://www.educatemeleague.com/uploads/job/logo/32891806/thumb_allegiant.png',
-            title: 'Second Grade Teacher',
-            school: 'Allegiant Prep',
-            location: 'Indianapolis, IN'
-          },
-          { id: 4, divider: true, inset: true },
-          {
-            id: 5,
-            imageUrl: 'https://www.educatemeleague.com/uploads/job/logo/32891806/thumb_allegiant.png',
-            title: 'Founding Third Grade Teacher',
-            school: 'Allegiant Prep',
-            location: 'Indianapolis, IN'
-          }
-        ],
+        jobs: undefined,
         educators: undefined
       }
     },
     async asyncData({ params }) {
-			return fetch('http://api.educateme.wavelinkllc.com/educators/', { method: 'GET' })
-				.then((response) => { 
-					if (response.status == 200) {
-						return response.json()
-						.then((responseJson) => {
-							if (responseJson.isSuccess) {
-								return { educators: responseJson.educators };
-							}
-						})
-					}
-					return undefined;
-				})
-				.catch((error) => {
-					console.error(error);
-					return undefined;
-				});
+      var educatorsSearch = await Educators.search(3, 0, '', '');
+      var jobsSearch = await Jobs.search(3, 0, '', '', '');
+      return { educators: educatorsSearch?.educators, jobs: jobsSearch?.jobs };
     },
     methods: {
       async navigate(path) {
