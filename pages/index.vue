@@ -187,6 +187,7 @@
                 <v-list-item
                   v-else
                   :key="job.id"
+                  @click="navigate('/job/' + job.id)"
                 >
                   <v-list-item-avatar>
                     <v-img :src="job.imageUrl || '/placeholder-user.png'"></v-img>
