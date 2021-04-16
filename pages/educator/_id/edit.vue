@@ -91,9 +91,6 @@
   export default {
     components: {
     },
-    props: {
-      registrationType: String
-    },
     data: function() {
       return {
         content: Content,
@@ -146,7 +143,7 @@
               this.isProcessing = false;
             }
           } else {
-            var errorMessage = "There was an error signing up." + " Please update entries and try again";
+            var errorMessage = "There was an error saving." + " Please update entries and try again";
             window.alert(errorMessage);
             this.isProcessing = false;
           }
@@ -162,7 +159,7 @@
           title: this.educator.title,
           bio: this.educator.bio,
           imageUrl: this.educator.imageUrl
-        }
+        };
         return fetch('http://api.educateme.wavelinkllc.com/educator/' + this.educator._id + '/update/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
