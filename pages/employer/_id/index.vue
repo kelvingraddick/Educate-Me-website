@@ -50,10 +50,16 @@
               <v-card-subtitle class="">{{employer && employer.emailAddress}}</v-card-subtitle>
               <v-card-title class="">Phone Number</v-card-title>
               <v-card-subtitle class="">{{employer && employer.phoneNumber}}</v-card-subtitle>
-              <v-btn v-if="isLoggedInEmployer" depressed @click="onLogoutButtonClick" class="font-weight-bold ma-4" color="error" height="40">
-                Logout &nbsp;
-                <v-icon>mdi-form</v-icon>
-              </v-btn>
+              <v-card-actions v-if="isLoggedInEmployer" class="ma-2">
+                <v-btn depressed @click="onEditButtonClick" class="font-weight-bold" color="primary" height="40">
+                  Edit &nbsp;
+                  <v-icon>mdi-cog</v-icon>
+                </v-btn>
+                <v-btn depressed @click="onLogoutButtonClick" class="font-weight-bold" color="error" height="40">
+                  Logout &nbsp;
+                  <v-icon>mdi-door</v-icon>
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -106,6 +112,9 @@
 				});
 		},
     methods: {
+      async onEditButtonClick() {
+        this.$router.push({ path: '/employer/' + this.employer?._id + '/edit/' });
+      },
       async onLogoutButtonClick() {
         localStorage.removeItem('TOKEN');
         this.$store.commit('setToken', undefined);
