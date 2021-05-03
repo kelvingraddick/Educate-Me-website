@@ -61,6 +61,40 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
+            <v-card
+              class="mt-5"
+              outlined
+            >
+              <v-card-title class="">Jobs</v-card-title>
+              <v-list three-line>
+                <template v-for="(job, index) in employer.jobs">
+                  <v-divider
+                    v-if="index > 0"
+                    :key="index"
+                    inset
+                  ></v-divider>
+                  <v-list-item
+                    :key="job._id"
+                    @click="onJobClick(job._id)"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="job.imageUrl || '/placeholder-user.png'"></v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title v-html="job.title" class="font-weight-bold">></v-list-item-title>
+                      <v-list-item-subtitle v-html="job.type"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-html="(job.categories && job.categories[0]) || ''"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-list>
+              <v-card-actions class="ma-2">
+                <v-btn depressed @click="onAddJobButtonClick" class="font-weight-bold" color="primary" height="40">
+                  Add a job &nbsp;
+                  <v-icon>mdi-suitcase</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -115,6 +149,9 @@
       async onEditButtonClick() {
         this.$router.push({ path: '/employer/' + this.employer?._id + '/edit/' });
       },
+      async onAddJobButtonClick() {
+        this.$router.push({ path: '/job/create/' });
+      },
       async onLogoutButtonClick() {
         localStorage.removeItem('TOKEN');
         this.$store.commit('setToken', undefined);
@@ -124,6 +161,9 @@
       },
       async onLinkedInButtonClick() {
 
+      },
+      async onJobClick(id) {
+        this.$router.push({ path: '/job/' + id });
       }
     }
   }
