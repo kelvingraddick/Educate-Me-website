@@ -29,6 +29,14 @@
         </v-btn>
         <v-btn
           color="black"
+          v-show="this.$store.state.educator || this.$store.state.employer"
+          @click.stop="onAccountButtonClick"
+          icon
+        >
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+        <v-btn
+          color="black"
           @click.stop="isNavigationDrawerOpen = !isNavigationDrawerOpen"
           icon
         >
@@ -106,6 +114,15 @@
     data () {
       return {
         isNavigationDrawerOpen: false
+      }
+    },
+    methods: {
+      async onAccountButtonClick() {
+        if (this.$store.state.educator) {
+          this.$router.push({ path: '/educator/' + this.$store.state.educator._id });
+        } else if (this.$store.state.employer) {
+          this.$router.push({ path: '/employer/' + this.$store.state.employer._id });
+        }
       }
     }
   }
