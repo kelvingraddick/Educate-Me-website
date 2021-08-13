@@ -85,6 +85,20 @@
               outlined
               dense
             ></v-text-field>
+            <v-text-field
+              v-model="educator.city"
+              label="City"
+              outlined
+              dense
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="educator.state"
+              label="State"
+              outlined
+              dense
+              required
+            ></v-text-field>
             <v-btn depressed @click="onRegisterButtonClick" class="font-weight-bold" color="error" height="40">
               Register &nbsp;
               <v-icon>mdi-form</v-icon>
@@ -120,6 +134,8 @@
           password: undefined,
           title: undefined,
           bio: undefined,
+          city: undefined,
+          state: undefined,
           imageUrl: undefined
         },
         showPassword: false,
