@@ -74,21 +74,35 @@
             ></v-text-field>
             <v-text-field
               v-model="job.city"
+              :rules="cityValidationRules"
               label="City"
               outlined
               dense
+              required
             ></v-text-field>
             <v-text-field
               v-model="job.state"
+              :rules="stateValidationRules"
               label="State"
               outlined
               dense
+              required
             ></v-text-field>
             <v-text-field
               v-model="job.zipCode"
+              :rules="zipCodeValidationRules"
               label="ZipCode"
               outlined
               dense
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="job.postingUrl"
+              :rules="postingUrlValidationRules"
+              label="Job Posting URL"
+              outlined
+              dense
+              required
             ></v-text-field>
             <v-btn depressed @click="onCreateButtonClick" class="font-weight-bold" color="error" height="40">
               Create &nbsp;
@@ -129,6 +143,7 @@
           state: undefined,
           zipCode: undefined,
           imageUrl: undefined,
+          postingUrl: undefined,
           categories: ["teacher"]
         },
         showPassword: false,
@@ -144,6 +159,22 @@
           v => !!v || 'Instructions are required',
           v => (v && v.length < 5000) || 'Instructions must be no greater than 5000 characters',
         ],
+        cityValidationRules: [
+          v => !!v || 'City is required',
+          v => (v && v.length < 50) || 'City must be no greater than 50 characters',
+        ],
+        stateValidationRules: [
+          v => !!v || 'State is required',
+          v => (v && v.length == 2) || 'State must be 2 character abbreviation',
+        ],
+        zipCodeValidationRules: [
+          v => !!v || 'Zip Code is required',
+          v => (v && v.length == 5) || 'Zip Code must be 5 characters',
+        ],
+        postingUrlValidationRules: [
+          v => !!v || 'Posting URL is required',
+          v => (v && v.length < 5000) || 'Posting URL must be no greater than 5000 characters',
+        ],
         isProcessing: false
       }
     },
@@ -155,7 +186,7 @@
           if (response) {
             if (response.isSuccess) {
               // success
-              this.$router.push({ path: '/employer/' + this.$store.employer._id });
+              this.$router.push({ path: '/job/' + response.job._id });
             } else {
               window.alert(response.errorMessage);
               this.isProcessing = false;
