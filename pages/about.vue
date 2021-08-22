@@ -4,7 +4,7 @@
       {{content['Page Title Text']}}
     </div>
     <v-layout class="mt-10 mb-10" row wrap>
-      <v-flex xs8>
+      <v-flex xs12 md8>
         <div>
           <v-card>
             <v-img
@@ -22,7 +22,7 @@
           </v-card>
         </div>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs0 md4>
 
       </v-flex>
     </v-layout>
