@@ -295,58 +295,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .hero-image {
-    height: auto;
-  }
-
-  .graphic-image {
-    max-height: 400px;
-  }
   
-  .card {
-    width: auto;
-    height: auto;
-  }
-
-  .search-text-field label,
-  .search-text-field input,
-  .search-text-field input::placeholder {
-    color: white !important;
-  }
-
-  .submit-button {
-    width: 100%;
-  }
-
-  .red-bar {
-    width: 50%;
-    height: 5px;
-    background-color: rgb(255, 82, 82);
-    border-radius: 4px;
-  }
-
-  .gray-section {
-    background-color: #f2f2f2;
-  }
-
-  @media only screen and (min-width: 960px) {
-    .hero-image {
-      height: 550px;
-    }
-    
-    .card {
-      width: 100%;
-      height: 65px;
-    }
-  }
-
-  @media only screen and (min-width: 1264px) {
-    .container {
-      width: 1264px;
-    }
-
-    .hero-image {
-      height: 650px;
-    }
-  }
 </style>
