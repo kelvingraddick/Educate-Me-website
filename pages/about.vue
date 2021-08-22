@@ -1,27 +1,45 @@
 <template>
-    <v-img
-      src="/hero-1.jpg"
-      gradient="to top, rgba(255,255,255,.33), rgba(255,255,255,1)"
-    >
-      <v-container>
-        <div class="text-h4 font-weight-bold mt-5">
-          ABOUT US
+  <v-container>
+    <div class="text-h4 font-weight-bold mt-5">
+      {{content['Page Title Text']}}
+    </div>
+    <v-layout class="mt-10 mb-10" row wrap>
+      <v-flex xs8>
+        <div>
+          <v-card>
+            <v-img
+              src="./about-educate-me.jpg"
+            ></v-img>
+            <v-card-title style="display: block;" primary-title>
+              <div class="text-h4 font-weight-bold">
+                {{content['About Section Title Text']}}
+              </div>
+              <div class="red-bar"></div>
+              <div style="word-break: normal;" class="text-h5 font-weight-medium mt-3">
+                {{content['About Section Description Text']}}
+              </div>
+            </v-card-title>
+          </v-card>
         </div>
-        <div class="text-h5 mt-5">
-          Page coming soon!
-        </div>
-      </v-container>
-    </v-img>
+      </v-flex>
+      <v-flex xs4>
+
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
+  import Content from '@/content/pages/about.json';
+
   export default {
     components: {
     },
     data: function() {
       return {
+        content: Content
       }
-    }
+    },
   }
 </script>
 
