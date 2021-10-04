@@ -295,5 +295,12 @@
 </script>
 
 <style lang="scss" scoped>
-  
+
+  @media only screen and (min-width: 960px) {
+    .card {
+      width: 100%;
+      height: 65px;
+    }
+  }
+
 </style>
