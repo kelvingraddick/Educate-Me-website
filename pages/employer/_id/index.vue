@@ -95,6 +95,36 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
+            <v-card
+              v-if="isLoggedInEmployer"
+              class="mt-5"
+              outlined
+            >
+              <v-card-title class="">Job Matches</v-card-title>
+              <v-list three-line>
+                <template v-for="(educator, index) in educators">
+                  <v-divider
+                    v-if="index > 0"
+                    :key="index"
+                    inset
+                  ></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="educator.id"
+                    @click="navigate('/educator/' + educator._id)"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="educator.imageUrl || '/placeholder-user.png'"></v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title v-html="(educator.name && educator.name.first) + ' ' + (educator.name && educator.name.last)" class="font-weight-bold"></v-list-item-title>
+                      <v-list-item-subtitle v-html="educator.title"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-html="(educator.locations && educator.locations[0]) || ''"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-list>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -111,7 +141,8 @@
     data: function() {
       return {
         content: Content,
-        employer: undefined
+        employer: undefined,
+        educators: []
       }
     },
     computed: {
@@ -124,8 +155,11 @@
         return (storedEmployer && storedEmployer.imageUrl) || '/placeholder-user.png';
       }
     },
-    mounted: function() {
+    mounted: async function() {
       Authorize.tryEmployerSignIn(this.$store);
+      if (this.isLoggedInEmployer) {
+        this.educators = await this.getEducators(this.employer?._id);
+      }
     },
 		async asyncData({ params }) {
 			return fetch('http://api.educateme.wavelinkllc.com/employer/' + params.id, { method: 'GET' })
@@ -146,6 +180,27 @@
 				});
 		},
     methods: {
+      async getEducators(employerId) {
+        return fetch('http://api.educateme.wavelinkllc.com/employer/' + employerId + '/educators', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
+          })
+          .then((response) => { 
+            if (response.status == 200) {
+              return response.json()
+              .then((responseJson) => {
+                if (responseJson.isSuccess) {
+                  return responseJson.educators;
+                }
+              })
+            }
+            return undefined;
+          })
+          .catch((error) => {
+            console.error(error);
+            return undefined;
+          });
+      },
       async onEditButtonClick() {
         this.$router.push({ path: '/employer/' + this.employer?._id + '/edit/' });
       },
@@ -164,6 +219,9 @@
       },
       async onJobClick(id) {
         this.$router.push({ path: '/job/' + id });
+      },
+      async navigate(path) {
+        this.$router.push({ path: path });
       }
     }
   }
