@@ -59,6 +59,39 @@
                   Logout &nbsp;
                   <v-icon>mdi-door</v-icon>
                 </v-btn>
+                <v-btn text @click="onDeleteAccountButtonClick" class="font-weight-bold" color="error" height="40">
+                  Delete account
+                </v-btn>
+                <v-dialog
+                  v-model="isDeleteAccountDialogVisible"
+                  width="500"
+                >
+                  <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                      Account Deletion
+                    </v-card-title>
+                    <v-card-text>
+                      <br />Are you sure you want to delete the account?
+                    </v-card-text>
+                    <v-divider></v-divider>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="error"
+                        text
+                        @click="deleteAccount"
+                      >
+                        Yes (this is permanent!)
+                      </v-btn>
+                      <v-btn
+                        text
+                        @click="isDeleteAccountDialogVisible = false"
+                      >
+                        No
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-card-actions>
             </v-card>
             <v-card
@@ -108,7 +141,8 @@
       return {
         content: Content,
         educator: undefined,
-        jobs: []
+        jobs: [],
+        isDeleteAccountDialogVisible: false
       }
     },
     computed: {
@@ -163,6 +197,30 @@
             return undefined;
           });
       },
+      async deleteAccount() {
+        fetch('http://api.educateme.wavelinkllc.com/educator/' + this.educator?._id + '/delete', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
+          })
+          .then((response) => { 
+            if (response.status == 200) {
+              response.json()
+              .then((responseJson) => {
+                if (responseJson.isSuccess) {
+                  window.alert("The account was successfully deleted.");
+                  window.location = '/';
+                } else {
+                  window.alert("There was an error. Please try again.");
+                }
+              })
+            } else {
+              window.alert("There was an error. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      },
       async onEditButtonClick() {
         this.$router.push({ path: '/educator/' + this.educator?._id + '/edit/' });
       },
@@ -171,6 +229,9 @@
         this.$store.commit('setEducator', undefined);
         this.$store.commit('setEmployer', undefined);
         this.$router.push({ path: '/' });
+      },
+      async onDeleteAccountButtonClick() {
+        this.isDeleteAccountDialogVisible = true;
       },
       async onLinkedInButtonClick() {
 
