@@ -46,9 +46,9 @@
               :key="index"
               sub-group
             >
-            <template v-slot:activator>
-              <v-list-item-title>Matches</v-list-item-title>
-            </template>
+              <template v-slot:activator>
+                <v-list-item-title>Matches</v-list-item-title>
+              </template>
               <v-list three-line>
                 <template v-for="(job, index) in match.jobs">
                   <v-divider
