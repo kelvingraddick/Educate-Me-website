@@ -190,7 +190,6 @@
       }
     },
     mounted: async function() {
-      Authorize.tryEmployerSignIn(this.$store);
       if (this.isLoggedInEmployer) {
         this.educators = await this.getEducators(this.employer?._id);
       }

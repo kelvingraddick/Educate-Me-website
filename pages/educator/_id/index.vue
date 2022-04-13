@@ -101,7 +101,7 @@
             >
               <v-card-title class="">Job Matches</v-card-title>
               <v-list three-line>
-                <template v-for="(job, index) in jobs">
+                <template v-for="(job) in jobs">
                   <v-divider
                     v-if="job.divider"
                     :key="job.id + '-divider'"
@@ -152,7 +152,6 @@
       }
     },
     mounted: async function() {
-      await Authorize.tryEducatorSignIn(this.$store);
       if (this.isLoggedInEducator) {
         this.jobs = await this.getJobs(this.educator?._id);
       }

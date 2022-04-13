@@ -100,7 +100,6 @@
       }
     },
     mounted: async function() {
-      await Authorize.tryEducatorSignIn(this.$store);
       if (this.isLoggedInEducator) {
         this.matches = await this.getMatches();
       }

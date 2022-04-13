@@ -178,7 +178,7 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(job, index) in jobs">
+              <template v-for="(job) in jobs">
                 <v-divider
                   v-if="job.divider"
                   :key="job.id + '-divider'"

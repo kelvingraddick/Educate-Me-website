@@ -88,7 +88,7 @@
       },
     },
     mounted: function() {
-      Authorize.tryEmployerSignIn(this.$store);
+
     },
 		async asyncData({ params }) {
 			return fetch('http://api.educateme.wavelinkllc.com/job/' + params.id, { method: 'GET' })
