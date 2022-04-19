@@ -110,8 +110,6 @@
 </template>
 
 <script>
-  import Authorize from '@/helpers/authorize.js';
-
   export default {
     data () {
       return {
@@ -119,8 +117,7 @@
       }
     },
     mounted: function() {
-      Authorize.tryEducatorSignIn(this.$store);
-      Authorize.tryEmployerSignIn(this.$store);
+      
     },
     methods: {
       async onAccountButtonClick() {

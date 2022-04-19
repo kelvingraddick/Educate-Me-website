@@ -41,6 +41,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '~/plugins/authorize.js', mode: 'client' }
   ],
   /*
   ** Auto import components

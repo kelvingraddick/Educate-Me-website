@@ -166,7 +166,6 @@
 
 <script>
   import Content from '@/content/pages/home.json';
-  import Authorize from '@/helpers/authorize.js'
 
   export default {
     components: {

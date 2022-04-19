@@ -212,7 +212,7 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(educator, index) in educators.slice().sort(() => 0.5 - Math.random()).slice(0, 3)">
+              <template v-for="(educator, index) in (educators || []).slice().sort(() => 0.5 - Math.random()).slice(0, 3)">
                 <v-divider
                   v-if="index > 0"
                   :key="educator._id + '-divider'"

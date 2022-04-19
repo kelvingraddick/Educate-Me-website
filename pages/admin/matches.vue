@@ -24,11 +24,11 @@
           <template v-for="(match, index) in matches">
             <v-divider
               v-if="index > 0"
-              :key="index"
+              :key="'divider/' + index"
               inset
             ></v-divider>
             <v-list-item
-              :key="match.educator._id"
+              :key="'educator/' + match.educator._id"
               @click="navigate('/educator/' + match.educator._id)"
             >
               <v-list-item-avatar>
@@ -53,11 +53,11 @@
                 <template v-for="(job, index) in match.jobs">
                   <v-divider
                     v-if="index > 0"
-                    :key="index"
+                    :key="'divider/' + job._id + '/' + index"
                     inset
                   ></v-divider>
                   <v-list-item
-                    :key="job._id"
+                    :key="'job/' + match.educator._id + '/' + job._id"
                     @click="navigate('/job/' + job._id)"
                   >
                     <v-list-item-avatar>
@@ -82,7 +82,6 @@
 
 <script>
   import Content from '@/content/pages/home.json';
-  import Authorize from '@/helpers/authorize.js';
 
   export default {
     components: {

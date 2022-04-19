@@ -1,6 +1,7 @@
 var tryEducatorSignIn = async function(store) {
-  var token = localStorage.getItem('TOKEN');
+  var token = localStorage.getItem('TOKEN') || store.state.token;
   if (token) {
+    localStorage.setItem('TOKEN', token);
     store.commit('setToken', token);
     var response = await _signIn('educator', token);
     if (response) {
@@ -10,8 +11,9 @@ var tryEducatorSignIn = async function(store) {
 }
 
 var tryEmployerSignIn = async function(store) {
-  var token = localStorage.getItem('TOKEN');
+  var token = localStorage.getItem('TOKEN') || store.state.token;
   if (token) {
+    localStorage.setItem('TOKEN', token);
     store.commit('setToken', token);
     var response = await _signIn('employer', token);
     if (response) {
