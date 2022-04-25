@@ -7,11 +7,11 @@
     >
       <v-container>
         <div class="text-h4 font-weight-bold mt-5">
-          ADMIN / MATCHES
+          ADMIN / EDUCATOR / JOB MATCHES
         </div>
         <div class="red-bar"></div>
         <div class="text-h5 mt-5">
-          Administor over the EducateME platform / matches
+          Administor over the EducateME platform / educator / job matches
         </div>
       </v-container>
     </v-img>
@@ -20,11 +20,11 @@
         class="mt-5"
         outlined
       >
-        <v-list three-line>
-          <template v-for="(match, index) in matches">
+        <v-list>
+          <template v-for="(match, matchIndex) in matches">
             <v-divider
-              v-if="index > 0"
-              :key="'divider/' + index"
+              v-if="matchIndex > 0"
+              :key="'divider/' + matchIndex"
               inset
             ></v-divider>
             <v-list-item
@@ -42,18 +42,20 @@
             </v-list-item>
 
             <v-list-group
-              :value="true"
-              :key="index"
+              :value="false"
+              :key="matchIndex"
               sub-group
             >
               <template v-slot:activator>
-                <v-list-item-title>Matches</v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title>Job matches</v-list-item-title>
+                </v-list-item-content>
               </template>
               <v-list three-line>
-                <template v-for="(job, index) in match.jobs">
+                <template v-for="(job, jobIndex) in match.jobs">
                   <v-divider
-                    v-if="index > 0"
-                    :key="'divider/' + job._id + '/' + index"
+                    v-if="jobIndex > 0"
+                    :key="'divider/' + job._id + '/' + jobIndex"
                     inset
                   ></v-divider>
                   <v-list-item
