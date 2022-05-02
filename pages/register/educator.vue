@@ -7,7 +7,7 @@
               REGISTER
             </div>
             <div class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register as an eductor</span>
+              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register as an educator</span>
             </div>
             <div class="text-h7 font-weight-medium mt-2">
               <span class="darkgrey--text">Already have an account? <nuxt-link to="/signin/educator">Sign in instead</nuxt-link>.</span><br />
@@ -32,7 +32,7 @@
             lazy-validation
           >
             <v-text-field
-              v-model="educator.firstName"
+              v-model="educator.name.first"
               :rules="nameValidationRules"
               label="First name"
               outlined
@@ -40,7 +40,7 @@
               required
             ></v-text-field>
             <v-text-field
-              v-model="educator.lastName"
+              v-model="educator.name.last"
               :rules="nameValidationRules"
               label="Last name"
               outlined
@@ -75,6 +75,7 @@
             ></v-text-field>
             <v-text-field
               v-model="educator.title"
+              :rules="requiredRules"
               label="Title"
               outlined
               dense
@@ -85,20 +86,78 @@
               outlined
               dense
             ></v-text-field>
-            <v-text-field
-              v-model="educator.city"
-              label="City"
+            <v-autocomplete
+              v-model="educator.gender"
+              :items="genders"
               outlined
               dense
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="educator.state"
-              label="State"
+              chips
+              small-chips
+              label="Gender"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.race"
+              :items="races"
               outlined
               dense
-              required
-            ></v-text-field>
+              chips
+              small-chips
+              label="Race"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.locations"
+              :items="citiesStates"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Locations"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.locationTypes"
+              :items="locationTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Location types"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.schoolTypes"
+              :items="schoolTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School types"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.schoolLevels"
+              :items="schoolLevels"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School levels"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.certificationStatus"
+              :items="certificationStatus"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Certification status"
+            ></v-autocomplete>
             <v-btn depressed @click="onRegisterButtonClick" class="font-weight-bold" color="error" height="40">
               Register &nbsp;
               <v-icon>mdi-form</v-icon>
@@ -116,6 +175,13 @@
 
 <script>
   import Content from '@/content/pages/home.json';
+  import CertificationStatus from '@/constants/certification-status.js';
+  import CitiesStates from '@/constants/cities-states.js';
+  import Genders from '@/constants/genders.js';
+  import LocationTypes from '@/constants/location-types.js';
+  import Races from '@/constants/races.js';
+  import SchoolLevels from '@/constants/school-levels.js';
+  import SchoolTypes from '@/constants/school-types.js';
 
   export default {
     components: {
@@ -127,18 +193,34 @@
       return {
         content: Content,
         educator: {
-          firstName: undefined,
-          lastName: undefined,
+          name: { first: undefined, last: undefined },
           emailAddress: undefined,
           phoneNumber: undefined,
           password: undefined,
           title: undefined,
           bio: undefined,
-          city: undefined,
-          state: undefined,
-          imageUrl: undefined
+          imageUrl: undefined,
+          gender: undefined,
+          race: undefined,
+          documentUrls: [],
+          locations: [],
+          locationTypes: [],
+          schoolTypes: [],
+          schoolLevels: [],
+          certificationStatus: undefined
         },
         showPassword: false,
+        certificationStatus: CertificationStatus,
+        citiesStates: CitiesStates.map((x) => x.city + ', ' + x.state),
+        genders: Genders,
+        locationTypes: LocationTypes,
+        races: Races,
+        schoolLevels: SchoolLevels,
+        schoolTypes: SchoolTypes,
+        requiredRules: [
+          v => !!v || 'This field is required.',
+          v => (v && v.length > 0) || 'This field is required.',
+        ],
         nameValidationRules: [
           v => !!v || 'First and last names are required',
           v => (v && v.length < 10) || 'First and last names must be no greater than 10 characters each',
