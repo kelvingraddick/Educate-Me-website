@@ -9,9 +9,6 @@
             <div class="text-h6 font-weight-medium mt-2">
               <span class="darkgrey--text"><b>Fill out the form below</b> to add a new job</span>
             </div>
-            <div class="text-h7 font-weight-medium mt-2">
-              <span class="darkgrey--text">Already created the job? <nuxt-link to="/jobs">Edit instead</nuxt-link>.</span><br />
-            </div>
           </v-col>
           <v-col cols="12" md="6" class="d-flex flex-column justify-center">
             <v-img
@@ -175,7 +172,6 @@
     components: {
     },
     props: {
-      registrationType: String
     },
     data: function() {
       return {
@@ -197,7 +193,6 @@
           schoolLevel: undefined,
           certificationStatus: undefined
         },
-        showPassword: false,
         certificationStatus: CertificationStatus,
         cities: CitiesStates.map((x) => x.city),
         states: CitiesStates.map((x) => x.state),

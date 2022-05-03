@@ -129,7 +129,6 @@
     components: {
     },
     props: {
-      registrationType: String
     },
     data: function() {
       return {
