@@ -72,22 +72,26 @@
               outlined
               dense
             ></v-text-field>
-            <v-text-field
+            <v-autocomplete
               v-model="job.city"
-              :rules="cityValidationRules"
+              :items="cities"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
               label="City"
-              outlined
-              dense
-              required
-            ></v-text-field>
-            <v-text-field
+            ></v-autocomplete>
+            <v-autocomplete
               v-model="job.state"
-              :rules="stateValidationRules"
-              label="State"
+              :items="states"
+              :rules="requiredRules"
               outlined
               dense
-              required
-            ></v-text-field>
+              chips
+              small-chips
+              label="State"
+            ></v-autocomplete>
             <v-text-field
               v-model="job.zipCode"
               :rules="zipCodeValidationRules"
@@ -96,6 +100,16 @@
               dense
               required
             ></v-text-field>
+            <v-autocomplete
+              v-model="job.locationType"
+              :items="locationTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Location type"
+            ></v-autocomplete>
             <v-text-field
               v-model="job.postingUrl"
               :rules="postingUrlValidationRules"
@@ -104,6 +118,36 @@
               dense
               required
             ></v-text-field>
+            <v-autocomplete
+              v-model="job.schoolType"
+              :items="schoolTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School type"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="job.schoolLevel"
+              :items="schoolLevels"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School level"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="job.certificationStatus"
+              :items="certificationStatus"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Certification status"
+            ></v-autocomplete>
             <v-btn depressed @click="onCreateButtonClick" class="font-weight-bold" color="error" height="40">
               Create &nbsp;
               <v-icon>mdi-form</v-icon>
@@ -121,6 +165,11 @@
 
 <script>
   import Content from '@/content/pages/home.json';
+  import CertificationStatus from '@/constants/certification-status.js';
+  import CitiesStates from '@/constants/cities-states.js';
+  import LocationTypes from '@/constants/location-types.js';
+  import SchoolLevels from '@/constants/school-levels.js';
+  import SchoolTypes from '@/constants/school-types.js';
 
   export default {
     components: {
@@ -132,7 +181,6 @@
       return {
         content: Content,
         job: {
-          type: 'Full-time',
           title: undefined,
           description: undefined,
           instructions: undefined,
@@ -142,11 +190,24 @@
           city: undefined,
           state: undefined,
           zipCode: undefined,
+          locationType: undefined,
           imageUrl: undefined,
           postingUrl: undefined,
-          categories: ["teacher"]
+          schoolType: undefined,
+          schoolLevel: undefined,
+          certificationStatus: undefined
         },
         showPassword: false,
+        certificationStatus: CertificationStatus,
+        cities: CitiesStates.map((x) => x.city),
+        states: CitiesStates.map((x) => x.state),
+        locationTypes: LocationTypes,
+        schoolLevels: SchoolLevels,
+        schoolTypes: SchoolTypes,
+        requiredRules: [
+          v => !!v || 'This field is required.',
+          v => (v && v.length > 0) || 'This field is required.',
+        ],
         titleValidationRules: [
           v => !!v || 'Title is required',
           v => (v && v.length < 50) || 'Title must be no greater than 50 characters',
@@ -158,14 +219,6 @@
         instructionsValidationRules: [
           v => !!v || 'Instructions are required',
           v => (v && v.length < 5000) || 'Instructions must be no greater than 5000 characters',
-        ],
-        cityValidationRules: [
-          v => !!v || 'City is required',
-          v => (v && v.length < 50) || 'City must be no greater than 50 characters',
-        ],
-        stateValidationRules: [
-          v => !!v || 'State is required',
-          v => (v && v.length == 2) || 'State must be 2 character abbreviation',
         ],
         zipCodeValidationRules: [
           v => !!v || 'Zip Code is required',
