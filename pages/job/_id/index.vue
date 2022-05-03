@@ -37,14 +37,39 @@
               class="card d-block"
               outlined
             >
-              <v-card-title class="">Description</v-card-title>
-              <v-card-subtitle class="">{{job && job.description}}</v-card-subtitle>
-              <v-card-title class="">Instructions</v-card-title>
-              <v-card-subtitle class="">{{job && job.instructions}}</v-card-subtitle>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-card-title class="">Description</v-card-title>
+                  <v-card-subtitle class="">{{job && job.description}}</v-card-subtitle>
+                  <v-card-title class="">Instructions</v-card-title>
+                  <v-card-subtitle class="">{{job && job.instructions}}</v-card-subtitle>
+                  <v-card-title class="">Certification Status</v-card-title>
+                  <v-card-subtitle class="">{{job && job.certificationStatus}}</v-card-subtitle>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-card-title class="">Address</v-card-title>
+                  <v-card-subtitle class="">
+                    {{job && job.addressName}}<br />
+                    {{job && job.addressLine1 + ','}}
+                    <v-content v-if="job && job.addressLine2">
+                      {{job && job.addressLine2}}
+                    </v-content>
+                    {{job && job.city + ', ' + job.state + ' ' + job.zipCode}}
+                  </v-card-subtitle>
+                  <v-card-title class="">Location Type</v-card-title>
+                  <v-card-subtitle class="">{{job && job.locationType}}</v-card-subtitle>
+                  <v-card-title class="">School Type</v-card-title>
+                  <v-card-subtitle class="">{{job && job.schoolType}}</v-card-subtitle>
+                </v-col>
+              </v-row>
               <v-card-actions v-show="!isProcessing" class="ma-2">
                 <v-btn depressed @click="onApplyButtonClick" class="font-weight-bold" color="primary" height="40">
                   Apply &nbsp;
                   <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn v-if="isJobOwner" depressed @click="onEditButtonClick" class="font-weight-bold" color="primary" height="40">
+                  Edit &nbsp;
+                  <v-icon>mdi-cog</v-icon>
                 </v-btn>
                 <v-btn v-if="isJobOwner" depressed @click="onDeleteButtonClick" class="font-weight-bold" color="error" height="40">
                   Delete &nbsp;
@@ -113,6 +138,9 @@
       },
       async onShareButtonClick() {
 
+      },
+      async onEditButtonClick() {
+        this.$router.push({ path: '/job/' + this.job?._id + '/edit/' });
       },
       async onDeleteButtonClick() {
         this.isProcessing = true;
