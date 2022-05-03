@@ -70,6 +70,78 @@
               outlined
               dense
             ></v-text-field>
+            <v-autocomplete
+              v-model="educator.gender"
+              :items="genders"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Gender"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.race"
+              :items="races"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Race"
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.locations"
+              :items="citiesStates"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Locations"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.locationTypes"
+              :items="locationTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Location types"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.schoolTypes"
+              :items="schoolTypes"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School types"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.schoolLevels"
+              :items="schoolLevels"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="School levels"
+              multiple
+            ></v-autocomplete>
+            <v-autocomplete
+              v-model="educator.certificationStatus"
+              :items="certificationStatus"
+              :rules="requiredRules"
+              outlined
+              dense
+              chips
+              small-chips
+              label="Certification status"
+            ></v-autocomplete>
             <v-btn depressed @click="onSaveButtonClick" class="font-weight-bold" color="primary" height="40">
               Save &nbsp;
               <v-icon>mdi-check</v-icon>
@@ -87,6 +159,13 @@
 
 <script>
   import Content from '@/content/pages/home.json';
+  import CertificationStatus from '@/constants/certification-status.js';
+  import CitiesStates from '@/constants/cities-states.js';
+  import Genders from '@/constants/genders.js';
+  import LocationTypes from '@/constants/location-types.js';
+  import Races from '@/constants/races.js';
+  import SchoolLevels from '@/constants/school-levels.js';
+  import SchoolTypes from '@/constants/school-types.js';
 
   export default {
     components: {
@@ -95,6 +174,17 @@
       return {
         content: Content,
         educator: undefined,
+        certificationStatus: CertificationStatus,
+        citiesStates: CitiesStates.map((x) => x.city + ', ' + x.state),
+        genders: Genders,
+        locationTypes: LocationTypes,
+        races: Races,
+        schoolLevels: SchoolLevels,
+        schoolTypes: SchoolTypes,
+        requiredRules: [
+          v => !!v || 'This field is required.',
+          v => (v && v.length > 0) || 'This field is required.',
+        ],
         nameValidationRules: [
           v => !!v || 'First and last names are required',
           v => (v && v.length < 10) || 'First and last names must be no greater than 10 characters each',
@@ -151,15 +241,7 @@
         return false;
       },
       async save() {
-        var body = {
-          firstName: this.educator.name.first,
-          lastName: this.educator.name.last,
-          emailAddress: this.educator.emailAddress,
-          phoneNumber: this.educator.phoneNumber,
-          title: this.educator.title,
-          bio: this.educator.bio,
-          imageUrl: this.educator.imageUrl
-        };
+        var body = this.educator;
         return fetch('http://api.educateme.wavelinkllc.com/educator/' + this.educator._id + '/update/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
