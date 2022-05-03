@@ -117,8 +117,8 @@
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title v-html="job.title" class="font-weight-bold"></v-list-item-title>
-                      <v-list-item-subtitle v-html="job.type"></v-list-item-subtitle>
-                      <v-list-item-subtitle v-html="(job.categories && job.categories[0]) || ''"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-html="job.schoolLevel"></v-list-item-subtitle>
+                      <v-list-item-subtitle v-html="job.city + ', ' + job.state"></v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </template>

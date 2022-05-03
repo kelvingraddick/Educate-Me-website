@@ -10,7 +10,7 @@
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{job && job.title}}</v-card-title>
               <v-card-text>
-                <div class="h6 font-weight-bold">{{job && job.type}} &middot; {{job && job.city}}, {{job && job.state}}</div>
+                <div class="h6 font-weight-bold">{{job && job.schoolLevel}} &middot; {{job && job.city}}, {{job && job.state}}</div>
                 <div>{{job && job.employer && job.employer.name}}</div>
               </v-card-text>
               <v-divider class="mx-4"></v-divider>
