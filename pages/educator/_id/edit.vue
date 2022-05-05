@@ -173,7 +173,7 @@
     data: function() {
       return {
         content: Content,
-        educator: undefined,
+        educator: { name: {} },
         certificationStatus: CertificationStatus,
         citiesStates: CitiesStates.map((x) => x.city + ', ' + x.state),
         genders: Genders,
@@ -207,7 +207,7 @@
 						return response.json()
 						.then((responseJson) => {
 							if (responseJson.isSuccess) {
-								return { educator: responseJson.educator };
+								return { educator: { ...{ name: {} }, ...responseJson.educator } };
 							}
 						})
 					}
