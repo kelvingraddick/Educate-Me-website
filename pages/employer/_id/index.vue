@@ -133,7 +133,7 @@
               class="mt-5"
               outlined
             >
-              <v-card-title class="">Job Matches</v-card-title>
+              <v-card-title class="">Educator Matches</v-card-title>
               <v-list three-line>
                 <template v-for="(educator, index) in educators">
                   <v-divider
