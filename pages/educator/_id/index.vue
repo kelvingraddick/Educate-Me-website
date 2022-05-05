@@ -44,12 +44,24 @@
               class="card d-block"
               outlined
             >
-              <v-card-title class="">Bio</v-card-title>
-              <v-card-subtitle class="">{{educator && educator.bio}}</v-card-subtitle>
-              <v-card-title class="">Email Address</v-card-title>
-              <v-card-subtitle class="">{{educator && educator.emailAddress}}</v-card-subtitle>
-              <v-card-title class="">Phone Number</v-card-title>
-              <v-card-subtitle class="">{{educator && educator.phoneNumber}}</v-card-subtitle>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-card-title class="">Bio</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.bio}}</v-card-subtitle>
+                  <v-card-title class="">Email Address</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.emailAddress}}</v-card-subtitle>
+                  <v-card-title class="">Phone Number</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.phoneNumber}}</v-card-subtitle>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-card-title class="">Locations</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.locations && educator.locations.join(', ')}}</v-card-subtitle>
+                  <v-card-title class="">School Levels</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.schoolLevels && educator.schoolLevels.join(', ')}}</v-card-subtitle>
+                  <v-card-title class="">Certification Status</v-card-title>
+                  <v-card-subtitle class="">{{educator && educator.certificationStatus}}</v-card-subtitle>
+                </v-col>
+              </v-row>
               <v-card-actions v-if="isLoggedInEducator" class="ma-2">
                 <v-btn depressed @click="onEditButtonClick" class="font-weight-bold" color="primary" height="40">
                   Edit &nbsp;
