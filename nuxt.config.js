@@ -75,5 +75,9 @@ export default {
   },
   server: {
     port: 4000, // default: 3000
+  },
+  publicRuntimeConfig: {
+    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+    AWS_ACCESS_KEY_SECRET: process.env.AWS_ACCESS_KEY_SECRET
   }
 }
