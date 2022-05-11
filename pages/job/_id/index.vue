@@ -6,7 +6,7 @@
             <v-card outlined>
               <v-img
                 height="250"
-                :src="userImageUrl"
+                :src="job.imageUrl || '/placeholder-job.png'"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{job && job.title}}</v-card-title>
               <v-card-text>
@@ -49,10 +49,14 @@
                 <v-col cols="12" md="6">
                   <v-card-title class="">Address</v-card-title>
                   <v-card-subtitle class="">
-                    {{job && job.addressName}}<br />
-                    {{job && job.addressLine1 + ','}}
+                    <v-content v-if="job && job.addressName">
+                      {{job.addressName}}<br />
+                    </v-content>
+                    <v-content v-if="job && job.addressLine1">
+                      {{job.addressLine1 + ','}}
+                    </v-content>  
                     <v-content v-if="job && job.addressLine2">
-                      {{job && job.addressLine2}}
+                      {{job.addressLine2}}
                     </v-content>
                     {{job && job.city + ', ' + job.state + ' ' + job.zipCode}}
                   </v-card-subtitle>
@@ -102,10 +106,6 @@
       }
     },
     computed: {
-      userImageUrl: function() {
-        var storedJob = this.$store.state.job;
-        return (storedJob && storedJob.imageUrl) || '/placeholder-job.png';
-      },
       isJobOwner: function() {
         var storedEmployer = this.$store.state.employer;
         return storedEmployer && storedEmployer._id == this.job?.employer._id;
