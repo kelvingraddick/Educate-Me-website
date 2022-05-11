@@ -6,7 +6,7 @@
             <v-card outlined>
               <v-img
                 height="250"
-                :src="job.imageUrl || '/placeholder-job.png'"
+                :src="(job && job.imageUrl) || '/placeholder-job.png'"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{job && job.title}}</v-card-title>
               <v-card-text>
