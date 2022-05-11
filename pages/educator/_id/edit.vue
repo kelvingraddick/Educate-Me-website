@@ -27,6 +27,20 @@
             v-show="!isProcessing"
             lazy-validation
           >
+            <v-list-item-avatar height="100" width="100" class="mb-6">
+              <v-img :src="educator.imageUrl || '/placeholder-educator.png'" />
+            </v-list-item-avatar>
+            <v-file-input
+              @change="onChooseImage"
+              :rules="imageValidationRules"
+              accept="image/*"
+              placeholder="Select an image"
+              :prepend-icon="null"
+              append-icon="mdi-camera"
+              label="Image"
+              outlined
+              dense
+            ></v-file-input>
             <v-text-field
               v-model="educator.name.first"
               :rules="nameValidationRules"
@@ -166,6 +180,7 @@
   import Races from '@/constants/races.js';
   import SchoolLevels from '@/constants/school-levels.js';
   import SchoolTypes from '@/constants/school-types.js';
+  import S3 from 'aws-s3';
 
   export default {
     components: {
@@ -184,6 +199,9 @@
         requiredRules: [
           v => !!v || 'This field is required.',
           v => (v && v.length > 0) || 'This field is required.',
+        ],
+        imageValidationRules: [
+          v => !v || v.size < 50000000 || 'Image size should be less than 50 MB!',
         ],
         nameValidationRules: [
           v => !!v || 'First and last names are required',
@@ -219,6 +237,29 @@
 				});
 		},
     methods: {
+      async onChooseImage(file) {
+        if (file) {
+          const config = {
+            bucketName: 'wavelink-educateme',
+            dirName: 'images/educator',
+            region: 'us-east-1',
+            accessKeyId: this.$config.AWS_ACCESS_KEY_ID,
+            secretAccessKey: this.$config.AWS_ACCESS_KEY_SECRET,
+            s3Url: 'https://wavelink-educateme.s3.amazonaws.com'
+          };
+          const fileName = 'educator.' + Date.now() + '.' + Math.round(Math.random() * 1E9);
+          const S3Client = new S3(config);
+          S3Client
+            .uploadFile(file, fileName)
+            .then(data => {
+              this.educator.imageUrl = data.location;
+            })
+            .catch(error => {
+              console.error('Failed to upload image to S3');
+              console.error(error);
+            });
+        }
+      },
       async onSaveButtonClick() {
         if (this.$refs.form.validate()) {
           this.isProcessing = true;
