@@ -233,6 +233,14 @@
           v => !!v || 'Instructions are required',
           v => (v && v.length < 5000) || 'Instructions must be no greater than 5000 characters',
         ],
+        addressNameValidationRules: [
+          v => !!v || 'Address Name is required',
+          v => (v && v.length < 50) || 'Address Name must be no greater than 50 characters',
+        ],
+        addressLine1ValidationRules: [
+          v => !!v || 'Address Line 1 is required',
+          v => (v && v.length < 50) || 'Address Line 1 must be no greater than 50 characters',
+        ],
         zipCodeValidationRules: [
           v => !!v || 'Zip Code is required',
           v => (v && v.length == 5) || 'Zip Code must be 5 characters',
