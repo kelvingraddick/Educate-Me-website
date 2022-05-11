@@ -6,7 +6,7 @@
             <v-card outlined>
               <v-img
                 height="250"
-                :src="educator.imageUrl || '/placeholder-user.png'"
+                :src="educator.imageUrl || '/placeholder-educator.png'"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{educator && educator.name && educator.name.first}} {{educator && educator.name && educator.name.last }} {{ isLoggedInEducator ? '(You)' : ''}}</v-card-title>
               <v-card-text>
@@ -125,7 +125,7 @@
                     @click="navigate('/job/' + job._id)"
                   >
                     <v-list-item-avatar>
-                      <v-img :src="job.imageUrl || '/placeholder-user.png'"></v-img>
+                      <v-img :src="job.imageUrl || '/placeholder-job.png'"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title v-html="job.title" class="font-weight-bold"></v-list-item-title>

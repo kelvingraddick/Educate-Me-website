@@ -104,7 +104,7 @@
     computed: {
       userImageUrl: function() {
         var storedJob = this.$store.state.job;
-        return (storedJob && storedJob.imageUrl) || '/placeholder-user.png';
+        return (storedJob && storedJob.imageUrl) || '/placeholder-job.png';
       },
       isJobOwner: function() {
         var storedEmployer = this.$store.state.employer;

@@ -32,7 +32,7 @@
               @click="navigate('/educator/' + match.educator._id)"
             >
               <v-list-item-avatar>
-                <v-img :src="match.educator.imageUrl || '/placeholder-user.png'"></v-img>
+                <v-img :src="match.educator.imageUrl || '/placeholder-educator.png'"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title v-html="match.educator.name && (match.educator.name.first + ' ' + match.educator.name.last)" class="font-weight-bold">></v-list-item-title>
@@ -63,7 +63,7 @@
                     @click="navigate('/job/' + job._id)"
                   >
                     <v-list-item-avatar>
-                      <v-img :src="job.imageUrl || '/placeholder-user.png'"></v-img>
+                      <v-img :src="job.imageUrl || '/placeholder-job.png'"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title v-html="job.title" class="font-weight-bold">></v-list-item-title>

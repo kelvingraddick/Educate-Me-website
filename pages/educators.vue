@@ -68,7 +68,7 @@
               @click="navigate('/educator/' + educator._id)"
             >
               <v-list-item-avatar>
-                <v-img :src="educator.imageUrl || '/placeholder-user.png'"></v-img>
+                <v-img :src="educator.imageUrl || '/placeholder-educator.png'"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title v-html="educator.name && (educator.name.first + ' ' + educator.name.last)" class="font-weight-bold">></v-list-item-title>

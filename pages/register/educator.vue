@@ -32,7 +32,7 @@
             lazy-validation
           >
             <v-list-item-avatar height="100" width="100" class="mb-6">
-              <v-img :src="educator.imageUrl || '/placeholder-user.png'" />
+              <v-img :src="educator.imageUrl || '/placeholder-educator.png'" />
             </v-list-item-avatar>
             <v-file-input
               @change="onChooseImage"
