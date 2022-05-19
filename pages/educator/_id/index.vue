@@ -6,7 +6,7 @@
             <v-card outlined>
               <v-img
                 height="250"
-                :src="educator.imageUrl || '/placeholder-educator.png'"
+                :src="(educator && educator.imageUrl) || '/placeholder-educator.png'"
               ></v-img>
               <v-card-title class="text-h5 font-weight-bold">{{educator && educator.name && educator.name.first}} {{educator && educator.name && educator.name.last }} {{ isLoggedInEducator ? '(You)' : ''}}</v-card-title>
               <v-card-text>
