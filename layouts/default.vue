@@ -9,7 +9,7 @@
       <v-container class="d-flex align-center">
         <v-img
           src="/logo-1.png"
-          alt="Educate ME"
+          alt="EDCOM HQ Jobs"
           max-width="190"
           contain
         ></v-img>
@@ -65,7 +65,7 @@
           class="black pt-2 text-center white--text"
           cols="12"
         >
-          {{ new Date().getFullYear() }} — <strong>Educate ME</strong>
+          {{ new Date().getFullYear() }} — <strong>EDCOM HQ Jobs</strong>
         </v-col>
       </v-row>
     </v-footer>

@@ -11,7 +11,7 @@
         </div>
         <div class="red-bar"></div>
         <div class="text-h5 mt-5">
-          Administor over the EducateME platform / employer / educator matches
+          Administor over the EDCOM HQ Jobs platform / employer / educator matches
         </div>
       </v-container>
     </v-img>

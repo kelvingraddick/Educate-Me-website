@@ -7,7 +7,7 @@
               {{this.$route.params.type}} {{this.$route.params.sso}} SIGN IN
             </div>
             <div class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">Welcome back to the Educate ME platform! <b>Sign in</b> below:</span>
+              <span class="darkgrey--text">Welcome back to the EDCOM HQ Jobs platform! <b>Sign in</b> below:</span>
             </div>
             <div class="text-h7 font-weight-medium mt-2">
               <span class="darkgrey--text">Don't have an account yet? <nuxt-link to="/register">Register instead</nuxt-link>.</span>
@@ -102,7 +102,7 @@
                   this.$route.query.redirect_url &&
                   response.ssoToken) {
                 window.location.href = this.$route.query.redirect_url + "?sso_token=" + response.ssoToken + "&sso_auth_status=ok";
-              } else { // Default/EducateME login flow
+              } else { // Default / EDCOM HQ Jobs login flow
                 this.$router.push({ path: '/' + this.$route.params.type + '/' + response[this.$route.params.type]._id });
               }
             } else {

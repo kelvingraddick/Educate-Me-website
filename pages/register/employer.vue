@@ -7,7 +7,7 @@
               REGISTER
             </div>
             <div class="text-h6 font-weight-medium mt-2">
-              <span class="darkgrey--text">Welcome to the Educate ME platform! <b>Fill out the form below</b> to register as an employer</span>
+              <span class="darkgrey--text">Welcome to the EDCOM HQ Jobs platform! <b>Fill out the form below</b> to register as an employer</span>
             </div>
             <div class="text-h7 font-weight-medium mt-2">
               <span class="darkgrey--text">Already have an account? <nuxt-link to="/signin/employer">Sign in instead</nuxt-link>.</span><br />

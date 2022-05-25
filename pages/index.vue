@@ -24,7 +24,7 @@
           </v-col>
         </v-row>
         <div class="text-h6 font-weight-medium mt-2">
-          <span class="darkgrey--text">Looking for a <b>position in education</b>? Let Educate ME help you find your dream school!</span>
+          <span class="darkgrey--text">Looking for a <b>position in education</b>? Let EDCOM HQ Jobs help you find your dream school!</span>
         </div>
         <v-btn outlined medium v-on:click="currentSearchType = searchTypes.JOBS" class="font-weight-bold mt-3" color="grey">
           <span :class="currentSearchType == searchTypes.JOBS ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
@@ -97,7 +97,7 @@
           </div>
           <div class="red-bar"></div>
           <div class="text-h5 font-weight-medium mt-3">
-            <b>Educate ME</b> Foundation, Inc. is a social enterprise determined to increase the number of men and women of color in the field of education.<br />
+            <b>EDCOM HQ Jobs</b> Foundation, Inc. is a social enterprise determined to increase the number of men and women of color in the field of education.<br />
             We seek to <b>change the education system</b> by creating a continuum for men and women of color to grow, achieve, and succeed from high school to career. 
           </div>
         </v-col>
@@ -120,7 +120,7 @@
                 src="https://static.wixstatic.com/media/9a82e0_d3518165511f409fae41715c3f692753~mv2_d_4000_6000_s_4_2.jpg/v1/fill/w_1372,h_1300,al_c,q_85,usm_0.66_1.00_0.01/9a82e0_d3518165511f409fae41715c3f692753~mv2_d_4000_6000_s_4_2.jpg"
                 height="200px"
               ></v-img>
-              <v-card-title class="font-weight-bold">Educate ME University</v-card-title>
+              <v-card-title class="font-weight-bold">EDCOM HQ Jobs University</v-card-title>
               <v-card-subtitle>
                 Help us further our mission and spread educational opportunities at your university!
               </v-card-subtitle>
@@ -139,7 +139,7 @@
               ></v-img>
               <v-card-title class="font-weight-bold">STEM Program</v-card-title>
               <v-card-subtitle>
-                The Educate ME Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with national certification organizations to create an innovative education program designed to grow and diversify the K-12 STEM field.
+                EDCOM HQ Jobs Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with national certification organizations to create an innovative education program designed to grow and diversify the K-12 STEM field.
               </v-card-subtitle>
               <v-card-actions>
                 <v-btn text>Apply / Learn More</v-btn>
@@ -154,9 +154,9 @@
                 src="/baby.png"
                 height="200px"
               ></v-img>
-              <v-card-title class="font-weight-bold">Educate ME Early Fellowship</v-card-title>
+              <v-card-title class="font-weight-bold">EDCOM HQ Jobs Early Fellowship</v-card-title>
               <v-card-subtitle>
-                The Educate ME Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with Early Learning Indiana to create an innovative education program designed to grow and diversify the teacher talent pool in Early Childhood education in Indianapolis.
+                EDCOM HQ Jobs Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with Early Learning Indiana to create an innovative education program designed to grow and diversify the teacher talent pool in Early Childhood education in Indianapolis.
               </v-card-subtitle>
               <v-card-actions>
                 <v-btn text>Apply / Learn More</v-btn>
