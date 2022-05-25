@@ -306,7 +306,7 @@
       },
       async register() {
         var body = this.educator;
-        return fetch('http://api.educateme.wavelinkllc.com/educator/register', {
+        return fetch('http://api.edcomjobs.com/educator/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

@@ -168,7 +168,7 @@
       }
     },
 		async asyncData({ params }) {
-      return fetch('http://api.educateme.wavelinkllc.com/educator/' + params.id, { method: 'GET' })
+      return fetch('http://api.edcomjobs.com/educator/' + params.id, { method: 'GET' })
 				.then((response) => { 
 					if (response.status == 200) {
 						return response.json()
@@ -187,7 +187,7 @@
 		},
     methods: {
       async getJobs(educatorId) {
-        return fetch('http://api.educateme.wavelinkllc.com/educator/' + educatorId + '/jobs', {
+        return fetch('http://api.edcomjobs.com/educator/' + educatorId + '/jobs', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           })
@@ -208,7 +208,7 @@
           });
       },
       async deleteAccount() {
-        fetch('http://api.educateme.wavelinkllc.com/educator/' + this.educator?._id + '/delete', {
+        fetch('http://api.edcomjobs.com/educator/' + this.educator?._id + '/delete', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           })

@@ -298,7 +298,7 @@
       },
       async create() {
         var body = this.job;
-        return fetch('http://api.educateme.wavelinkllc.com/job/create', {
+        return fetch('http://api.edcomjobs.com/job/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           body: JSON.stringify(body)

@@ -126,7 +126,7 @@
           ssoSource: this.$route.params.sso || 'educateme',
           ssoToken: this.$route.query.token
         };
-        return fetch('http://api.educateme.wavelinkllc.com/' + this.$route.params.type + '/authenticate', {
+        return fetch('http://api.edcomjobs.com/' + this.$route.params.type + '/authenticate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

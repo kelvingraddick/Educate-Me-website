@@ -23,7 +23,7 @@ var tryEmployerSignIn = async function(store) {
 }
 
 var _signIn = async function(userType, token) {
-	return fetch('http://api.educateme.wavelinkllc.com/' + userType + '/authorize', {
+	return fetch('http://api.edcomjobs.com/' + userType + '/authorize', {
 		method: 'POST',
 		headers: { 'Authorization': 'Bearer ' + token }
 	})
