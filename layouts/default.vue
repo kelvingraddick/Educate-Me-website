@@ -10,7 +10,7 @@
         <v-img
           src="/logo-1.png"
           alt="EDCOM HQ Jobs"
-          max-width="190"
+          max-width="250"
           contain
         ></v-img>
         <v-spacer />
