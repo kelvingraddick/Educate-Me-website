@@ -14,7 +14,7 @@
           contain
         ></v-img>
         <v-spacer />
-        <nuxt-link to="/" class="link d-none d-md-flex mx-4">Home</nuxt-link>
+        <nuxt-link to="/home" class="link d-none d-md-flex mx-4">Home</nuxt-link>
         <nuxt-link to="/about" class="link d-none d-md-flex mx-4">About</nuxt-link>
         <nuxt-link to="/jobs" class="link d-none d-md-flex mx-4">Jobs</nuxt-link>
         <nuxt-link to="/educators" class="link d-none d-md-flex mx-4">Educators</nuxt-link>
@@ -56,7 +56,7 @@
         no-gutters
         class="py-4"
       >
-        <nuxt-link to="/" class="link white--text mx-4">Home</nuxt-link>
+        <nuxt-link to="/home" class="link white--text mx-4">Home</nuxt-link>
         <nuxt-link to="/about" class="link white--text mx-4">About</nuxt-link>
         <nuxt-link to="/jobs" class="link white--text mx-4">Jobs</nuxt-link>
         <nuxt-link to="/educators" class="link white--text mx-4">Educators</nuxt-link>
@@ -78,7 +78,7 @@
       <v-list dense>
         <v-list-item>
           <v-list-item-icon><v-icon>mdi-chevron-right</v-icon></v-list-item-icon>
-          <v-list-item-content><v-list-item-title><nuxt-link to="/" class="link">Home</nuxt-link></v-list-item-title></v-list-item-content>
+          <v-list-item-content><v-list-item-title><nuxt-link to="/home" class="link">Home</nuxt-link></v-list-item-title></v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-icon><v-icon>mdi-chevron-right</v-icon></v-list-item-icon>
