@@ -7,9 +7,9 @@
       <v-flex xs12 md8>
         <div>
           <v-card>
-            <v-img
-              src="./about-educate-me.jpg"
-            ></v-img>
+            <div class="video">
+              <iframe src="https://www.youtube.com/embed/7uUGBgCfEKQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <v-card-title style="display: block;" primary-title>
               <div class="text-h4 font-weight-bold">
                 {{content['About Section Title Text']}}
@@ -44,5 +44,15 @@
 </script>
 
 <style lang="scss">
-  
+  .video iframe {
+    width: 100%;
+    height: 360px;
+  }
+
+  @media only screen and (min-width: 960px) {
+    .video iframe {
+      width: 100%;
+      height: 560px;
+    }
+  }
 </style>
