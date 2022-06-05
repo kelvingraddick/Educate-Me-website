@@ -239,7 +239,7 @@
       }
     },
     async asyncData({ params }) {
-			return fetch('http://api.edcomjobs.com/job/' + params.id, { method: 'GET' })
+			return fetch('https://api.edcomjobs.com/job/' + params.id, { method: 'GET' })
 				.then((response) => { 
 					if (response.status == 200) {
 						return response.json()
@@ -302,7 +302,7 @@
       },
       async save() {
         var body = this.job;
-        return fetch('http://api.edcomjobs.com/job/update/' + this.job._id, {
+        return fetch('https://api.edcomjobs.com/job/update/' + this.job._id, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           body: JSON.stringify(body)

@@ -1,5 +1,5 @@
 var search = async function(limit, offset, title, location) {
-  return fetch('http://api.edcomjobs.com/jobs/?limit=' + limit + '&offset=' + offset + '&title=' + title + '&location=' + location, { method: 'GET' })
+  return fetch('https://api.edcomjobs.com/jobs/?limit=' + limit + '&offset=' + offset + '&title=' + title + '&location=' + location, { method: 'GET' })
     .then((response) => { 
       if (response.status == 200) {
         return response.json()

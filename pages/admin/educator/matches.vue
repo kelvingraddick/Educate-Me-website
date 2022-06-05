@@ -107,7 +107,7 @@
     },
     methods: {
       async getMatches() {
-        return fetch('http://api.edcomjobs.com/educators/matches', {
+        return fetch('https://api.edcomjobs.com/educators/matches', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           })
