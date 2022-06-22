@@ -114,8 +114,8 @@
     mounted: function() {
 
     },
-		async asyncData({ params }) {
-			return fetch('https://api.edcomjobs.com/job/' + params.id, { method: 'GET' })
+		async asyncData({ $config, params }) {
+			return fetch($config.EDCOM_HQ_JOBS_API_BASE_URL + '/job/' + params.id, { method: 'GET' })
 				.then((response) => { 
 					if (response.status == 200) {
 						return response.json()
@@ -160,7 +160,7 @@
         }
       },
       async delete() {
-        return fetch('https://api.edcomjobs.com/job/delete/' + this.job._id, {
+        return fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/job/delete/' + this.job._id, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
         })

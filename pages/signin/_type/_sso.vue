@@ -126,7 +126,7 @@
           ssoSource: this.$route.params.sso || 'educateme',
           ssoToken: this.$route.query.token
         };
-        return fetch('https://api.edcomjobs.com/' + this.$route.params.type + '/authenticate', {
+        return fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/' + this.$route.params.type + '/authenticate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

@@ -76,6 +76,7 @@ export default {
     port: 4000, // default: 3000
   },
   publicRuntimeConfig: {
+    EDCOM_HQ_JOBS_API_BASE_URL: process.env.EDCOM_HQ_JOBS_API_BASE_URL,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_ACCESS_KEY_SECRET: process.env.AWS_ACCESS_KEY_SECRET
   }

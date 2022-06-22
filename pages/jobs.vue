@@ -112,12 +112,12 @@
         jobs: undefined
       }
     },
-    async asyncData({ params }) {
-			return Jobs.search(10, 0, '', '', '');
+    async asyncData({ $config, params }) {
+			return Jobs.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, '', '', '');
     },
     methods: {
       async search() {
-        var response = await Jobs.search(10, 0, this.searchTitle || '', this.searchType || '', this.searchLocation || '');
+        var response = await Jobs.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle || '', this.searchType || '', this.searchLocation || '');
         this.jobs = response.jobs;
       },
       async navigate(path) {

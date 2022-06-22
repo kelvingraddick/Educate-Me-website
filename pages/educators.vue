@@ -98,12 +98,12 @@
         educators: undefined
       }
     },
-    async asyncData({ params }) {
-			return Educators.search(10, 0, '', '');
+    async asyncData({ $config, params }) {
+			return Educators.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, '', '');
     },
     methods: {
       async search() {
-        var response = await Educators.search(10, 0, this.searchTitle, this.searchLocation);
+        var response = await Educators.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle, this.searchLocation);
         this.educators = response.educators;
       },
       async navigate(path) {

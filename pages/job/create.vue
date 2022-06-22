@@ -298,7 +298,7 @@
       },
       async create() {
         var body = this.job;
-        return fetch('https://api.edcomjobs.com/job/create', {
+        return fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/job/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           body: JSON.stringify(body)

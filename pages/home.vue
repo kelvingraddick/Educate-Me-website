@@ -281,9 +281,9 @@
         educators: undefined
       }
     },
-    async asyncData({ params }) {
-      var educatorsSearch = await Educators.search(3, 0, '', '');
-      var jobsSearch = await Jobs.search(3, 0, '', '', '');
+    async asyncData({ $config, params }) {
+      var educatorsSearch = await Educators.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 3, 0, '', '');
+      var jobsSearch = await Jobs.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 3, 0, '', '', '');
       return { educators: educatorsSearch?.educators, jobs: jobsSearch?.jobs };
     },
     methods: {

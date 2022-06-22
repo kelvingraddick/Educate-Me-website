@@ -167,8 +167,15 @@
         this.jobs = await this.getJobs(this.educator?._id);
       }
     },
-		async asyncData({ params }) {
-      return fetch('https://api.edcomjobs.com/educator/' + params.id, { method: 'GET' })
+    watch: {
+      async '$store.state.educator' (val) {
+        if (this.isLoggedInEducator) {
+          this.jobs = await this.getJobs(this.educator?._id);
+        }
+      }
+    },
+		async asyncData({ $config, params }) {
+      return fetch($config.EDCOM_HQ_JOBS_API_BASE_URL + '/educator/' + params.id, { method: 'GET' })
 				.then((response) => { 
 					if (response.status == 200) {
 						return response.json()
@@ -187,7 +194,7 @@
 		},
     methods: {
       async getJobs(educatorId) {
-        return fetch('https://api.edcomjobs.com/educator/' + educatorId + '/jobs', {
+        return fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/educator/' + educatorId + '/jobs', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           })
@@ -208,7 +215,7 @@
           });
       },
       async deleteAccount() {
-        fetch('https://api.edcomjobs.com/educator/' + this.educator?._id + '/delete', {
+        fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/educator/' + this.educator?._id + '/delete', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.$store.state.token },
           })

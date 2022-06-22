@@ -234,7 +234,7 @@
       },
       async register() {
         var body = this.employer;
-        return fetch('https://api.edcomjobs.com/employer/register', {
+        return fetch(this.$config.EDCOM_HQ_JOBS_API_BASE_URL + '/employer/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)
