@@ -178,14 +178,13 @@
             outlined
           >
             <v-list three-line>
-              <template v-for="(job) in jobs">
+              <template v-for="(job, index) in jobs">
                 <v-divider
-                  v-if="job.divider"
+                  v-if="index > 0"
                   :key="job.id + '-divider'"
                   inset
                 ></v-divider>
                 <v-list-item
-                  v-else
                   :key="job.id"
                   @click="navigate('/job/' + job.id)"
                 >

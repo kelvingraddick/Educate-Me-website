@@ -142,7 +142,6 @@
                     inset
                   ></v-divider>
                   <v-list-item
-                    v-else
                     :key="educator.id"
                     @click="navigate('/educator/' + educator._id)"
                   >
