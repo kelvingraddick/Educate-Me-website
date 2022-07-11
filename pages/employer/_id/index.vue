@@ -50,7 +50,7 @@
               <v-card-subtitle class="">{{employer && employer.emailAddress}}</v-card-subtitle>
               <v-card-title class="">Phone Number</v-card-title>
               <v-card-subtitle class="">{{employer && employer.phoneNumber}}</v-card-subtitle>
-              <v-card-actions v-if="isLoggedInEmployer" class="ma-2">
+              <v-card-actions v-if="isLoggedInEmployer || isLoggedInAdmin" class="ma-2">
                 <v-btn depressed @click="onEditButtonClick" class="font-weight-bold" color="primary" height="40">
                   Edit &nbsp;
                   <v-icon>mdi-cog</v-icon>
@@ -129,7 +129,7 @@
               </v-card-actions>
             </v-card>
             <v-card
-              v-if="isLoggedInEmployer"
+              v-if="isLoggedInEmployer || isLoggedInAdmin"
               class="mt-5"
               outlined
             >
@@ -182,19 +182,23 @@
         var storedEmployer = this.$store.state.employer;
         return storedEmployer && storedEmployer._id == this.employer?._id;
       },
+      isLoggedInAdmin: function() {
+        var storedEmployer = this.$store.state.employer;
+        return storedEmployer && storedEmployer.isAdmin;
+      },
       userImageUrl: function() {
         var storedEmployer = this.$store.state.employer;
         return (storedEmployer && storedEmployer.imageUrl) || '/placeholder-employer.png';
       }
     },
     mounted: async function() {
-      if (this.isLoggedInEmployer) {
+      if (this.isLoggedInEmployer || this.isLoggedInAdmin) {
         this.educators = await this.getEducators(this.employer?._id);
       }
     },
     watch: {
       async '$store.state.employer' (val) {
-        if (this.isLoggedInEmployer) {
+        if (this.isLoggedInEmployer || this.isLoggedInAdmin) {
           this.educators = await this.getEducators(this.employer?._id);
         }
       }

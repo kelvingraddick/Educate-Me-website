@@ -62,7 +62,7 @@
                   <v-card-subtitle class="">{{educator && educator.certificationStatus}}</v-card-subtitle>
                 </v-col>
               </v-row>
-              <v-card-actions v-if="isLoggedInEducator" class="ma-2">
+              <v-card-actions v-if="isLoggedInEducator || isLoggedInAdmin" class="ma-2">
                 <v-btn depressed @click="onEditButtonClick" class="font-weight-bold" color="primary" height="40">
                   Edit &nbsp;
                   <v-icon>mdi-cog</v-icon>
@@ -107,7 +107,7 @@
               </v-card-actions>
             </v-card>
             <v-card
-              v-if="isLoggedInEducator"
+              v-if="isLoggedInEducator || isLoggedInAdmin"
               class="mt-5"
               outlined
             >
@@ -160,16 +160,20 @@
       isLoggedInEducator: function() {
         var storedEducator = this.$store.state.educator;
         return storedEducator && storedEducator._id == this.educator?._id;
+      },
+      isLoggedInAdmin: function() {
+        var storedEmployer = this.$store.state.employer;
+        return storedEmployer && storedEmployer.isAdmin;
       }
     },
     mounted: async function() {
-      if (this.isLoggedInEducator) {
+      if (this.isLoggedInEducator || this.isLoggedInAdmin) {
         this.jobs = await this.getJobs(this.educator?._id);
       }
     },
     watch: {
       async '$store.state.educator' (val) {
-        if (this.isLoggedInEducator) {
+        if (this.isLoggedInEducator || this.isLoggedInAdmin) {
           this.jobs = await this.getJobs(this.educator?._id);
         }
       }
