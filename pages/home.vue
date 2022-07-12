@@ -24,7 +24,7 @@
           </v-col>
         </v-row>
         <div class="text-h6 font-weight-medium mt-2">
-          <span class="darkgrey--text">Looking for a <b>position in education</b>? Let EDCOM HQ Jobs help you find your dream school!</span>
+          <span class="darkgrey--text" v-html="content['Search Title Text']"></span>
         </div>
         <v-btn outlined medium v-on:click="currentSearchType = searchTypes.JOBS" class="font-weight-bold mt-3" color="grey">
           <span :class="currentSearchType == searchTypes.JOBS ? 'black--text' : ''">Find a job <v-icon>mdi-briefcase-search</v-icon></span>
@@ -33,7 +33,7 @@
           <span :class="currentSearchType == searchTypes.EDUCATORS ? 'black--text' : ''">Find an educator <v-icon>mdi-account-search</v-icon></span>
         </v-btn>
         <v-card
-          class="card d-block mt-2 px-2"
+          class="card d-block mt-2 px-2 py-2"
           outlined
           color="primary"
         >
@@ -93,13 +93,10 @@
         </v-col>
         <v-col cols="12" md="8" class="d-flex flex-column justify-center">
           <div class="text-h4 font-weight-bold">
-            WHO WE ARE
+            {{content['About Section Title Text']}}
           </div>
           <div class="red-bar"></div>
-          <div class="text-h5 font-weight-medium mt-3">
-            <b>EDCOM HQ Jobs</b> Foundation, Inc. is a social enterprise determined to increase the number of men and women of color in the field of education.<br />
-            We seek to <b>change the education system</b> by creating a continuum for men and women of color to grow, achieve, and succeed from high school to career. 
-          </div>
+          <div class="text-h5 font-weight-medium mt-3" v-html="content['About Section Description Text']"></div>
         </v-col>
       </v-row>
     </v-container>
@@ -117,15 +114,15 @@
               outlined
             >
               <v-img
-                src="https://static.wixstatic.com/media/9a82e0_d3518165511f409fae41715c3f692753~mv2_d_4000_6000_s_4_2.jpg/v1/fill/w_1372,h_1300,al_c,q_85,usm_0.66_1.00_0.01/9a82e0_d3518165511f409fae41715c3f692753~mv2_d_4000_6000_s_4_2.jpg"
+                :src="content['Program 1 Image URL']"
                 height="200px"
               ></v-img>
-              <v-card-title class="font-weight-bold">EDCOM HQ Jobs University</v-card-title>
+              <v-card-title class="font-weight-bold">{{content['Program 1 Title Text']}}</v-card-title>
               <v-card-subtitle>
-                Help us further our mission and spread educational opportunities at your university!
+                {{content['Program 1 Sub-Title Text']}}
               </v-card-subtitle>
               <v-card-actions>
-                <v-btn text>Apply / Learn More</v-btn>
+                <v-btn @click="navigate(content['Program 1 Link URL'])" text>Apply / Learn More</v-btn>
               </v-card-actions>
             </v-card>
             <v-card
@@ -134,15 +131,15 @@
               outlined
             >
               <v-img
-                src="https://static.wixstatic.com/media/9a82e0_56a41cad4f904f9c9aef6db13c1d5001~mv2.png/v1/fill/w_757,h_495,al_r/9a82e0_56a41cad4f904f9c9aef6db13c1d5001~mv2.png"
+                :src="content['Program 2 Image URL']"
                 height="200px"
               ></v-img>
-              <v-card-title class="font-weight-bold">STEM Program</v-card-title>
+              <v-card-title class="font-weight-bold">{{content['Program 2 Title Text']}}</v-card-title>
               <v-card-subtitle>
-                EDCOM HQ Jobs Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with national certification organizations to create an innovative education program designed to grow and diversify the K-12 STEM field.
+                {{content['Program 2 Sub-Title Text']}}
               </v-card-subtitle>
               <v-card-actions>
-                <v-btn text>Apply / Learn More</v-btn>
+                <v-btn @click="navigate(content['Program 2 Link URL'])" text>Apply / Learn More</v-btn>
               </v-card-actions>
             </v-card>
             <v-card
@@ -151,15 +148,15 @@
               outlined
             >
               <v-img
-                src="/baby.png"
+                :src="content['Program 3 Image URL']"
                 height="200px"
               ></v-img>
-              <v-card-title class="font-weight-bold">EDCOM HQ Jobs Early Fellowship</v-card-title>
+              <v-card-title class="font-weight-bold">{{content['Program 3 Title Text']}}</v-card-title>
               <v-card-subtitle>
-                EDCOM HQ Jobs Foundation, Inc. an Indianapolis, Indiana based Social Enterprise, has partnered with Early Learning Indiana to create an innovative education program designed to grow and diversify the teacher talent pool in Early Childhood education in Indianapolis.
+                {{content['Program 3 Sub-Title Text']}}
               </v-card-subtitle>
               <v-card-actions>
-                <v-btn text>Apply / Learn More</v-btn>
+                <v-btn @click="navigate(content['Program 3 Link URL'])" text>Apply / Learn More</v-btn>
               </v-card-actions>
             </v-card>
           </div>
@@ -240,11 +237,11 @@
       <v-col cols="12" md="12" class="d-flex flex-column justify-center">
         <v-container class="py-8">
           <div class="text-h4 font-weight-bold">
-            GET IN TOUCH
+            {{content['Contact Section Title Text']}}
           </div>
           <div class="red-bar"></div>
           <div class="text-h5 font-weight-medium mt-3">
-            Contact us directly for any inquiries!
+            {{content['Contact Section Sub-Title Text']}}
             <v-btn depressed next to="/contact" class="submit-button font-weight-bold mt-3" color="error" height="40">
               Contact Us &nbsp;
               <v-icon>mdi-phone</v-icon>
