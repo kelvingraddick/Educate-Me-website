@@ -1,6 +1,10 @@
 {
   "site Name": "EDCOM HQ Jobs",
-  "object": {
-    "sub-object": "Something 1"
-  }
+  "Email Address": "info@educatemefoundation.org",
+  "Phone Number": "317-426-1590",
+  "Address Line 1": "4430 McCoy St.",
+  "Address Line 2": "PO Box 26756",
+  "City": "Indianapolis",
+  "State": "IN",
+  "Zipcode": "46226"
 }
