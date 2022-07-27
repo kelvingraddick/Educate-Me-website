@@ -137,7 +137,11 @@
         window.open(this.job?.postingUrl, '_blank');
       },
       async onShareButtonClick() {
-
+        navigator.clipboard.writeText(window.location).then(function () {
+          alert('Copied page to clipboard for sharing!');
+        }, function(err) {
+          alert('Failed to copy page to clipboard for sharing: ', err);
+        });
       },
       async onEditButtonClick() {
         this.$router.push({ path: '/job/' + this.job?._id + '/edit/' });
