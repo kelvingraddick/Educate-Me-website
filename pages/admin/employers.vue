@@ -14,7 +14,7 @@
           Administor over the EDCOM HQ Jobs platform / employers
         </div>
         <v-card
-          class="card d-block mt-2 px-2"
+          class="card d-block mt-2 px-6 pt-6"
           outlined
           color="primary"
         >
@@ -147,7 +147,6 @@
     
     .card {
       width: 100%;
-      height: 65px;
     }
   }
 

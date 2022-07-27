@@ -33,7 +33,7 @@
           <span :class="currentSearchType == searchTypes.EDUCATORS ? 'black--text' : ''">Find an educator <v-icon>mdi-account-search</v-icon></span>
         </v-btn>
         <v-card
-          class="card d-block mt-2 px-2 py-2"
+          class="card d-block mt-2 px-6 pt-6"
           outlined
           color="primary"
         >
@@ -295,7 +295,6 @@
   @media only screen and (min-width: 960px) {
     .card {
       width: 100%;
-      height: 65px;
     }
   }
 
