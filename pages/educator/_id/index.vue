@@ -18,6 +18,14 @@
                 <v-btn
                   color="primary"
                   text
+                  @click="onShareButtonClick"
+                >
+                  <v-icon>mdi-file-document</v-icon>&nbsp;Share
+                </v-btn>
+                <!--
+                <v-btn
+                  color="primary"
+                  text
                   @click="onLinkedInButtonClick"
                 >
                   <v-icon>mdi-email</v-icon>&nbsp;Contact
@@ -36,6 +44,7 @@
                 >
                   <v-icon>mdi-linkedin</v-icon>&nbsp;LinkedIn
                 </v-btn>
+                -->
               </v-card-actions>
             </v-card>
           </v-col>
@@ -253,6 +262,13 @@
       },
       async onDeleteAccountButtonClick() {
         this.isDeleteAccountDialogVisible = true;
+      },
+      async onShareButtonClick() {
+        navigator.clipboard.writeText(window.location).then(function () {
+          alert('Copied page to clipboard for sharing!');
+        }, function(err) {
+          alert('Failed to copy page to clipboard for sharing: ', err);
+        });
       },
       async onLinkedInButtonClick() {
 
