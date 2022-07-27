@@ -41,7 +41,7 @@
             <v-col cols="12" md="3">
               <v-text-field
                 v-model="searchTitle"
-                label="Job title"
+                label="Title"
                 color="white"
                 class="search-text-field"
                 outlined
