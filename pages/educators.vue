@@ -93,17 +93,17 @@
     data: function() {
       return {
         content: Content,
-        searchTitle: '',
-        searchLocation: '',
+        searchTitle: this.$route.query.title || '',
+        searchLocation: this.$route.query.location || '',
         educators: undefined
       }
     },
-    async asyncData({ $config, params }) {
-			return Educators.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, '', '');
+    async asyncData({ $config, params, route }) {
+			return Educators.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, route?.query?.title || '', route?.query?.location || '');
     },
     methods: {
       async search() {
-        var response = await Educators.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle, this.searchLocation);
+        var response = await Educators.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle || '', this.searchLocation || '');
         this.educators = response.educators;
       },
       async navigate(path) {

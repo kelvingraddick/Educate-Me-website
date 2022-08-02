@@ -105,19 +105,19 @@
     data: function() {
       return {
         content: Content,
-        searchTitle: undefined,
+        searchTitle: this.$route.query.title || '',
         searchTypes: ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship'],
-        searchType: undefined,
-        searchLocation: undefined,
+        searchType: this.$route.query.type || '',
+        searchLocation: this.$route.query.location || '',
         jobs: undefined
       }
     },
-    async asyncData({ $config, params }) {
-			return Jobs.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, '', '', '');
+    async asyncData({ $config, params, route }) {
+			return Jobs.search($config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, route?.query?.title || '', route?.query?.location || '');
     },
     methods: {
       async search() {
-        var response = await Jobs.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle || '', this.searchType || '', this.searchLocation || '');
+        var response = await Jobs.search(this.$config.EDCOM_HQ_JOBS_API_BASE_URL, 10, 0, this.searchTitle || '', this.searchLocation || '');
         this.jobs = response.jobs;
       },
       async navigate(path) {

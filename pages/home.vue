@@ -73,7 +73,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
-              <v-btn depressed next :to="'/' + currentSearchType" class="submit-button font-weight-bold" color="error" height="40">
+              <v-btn depressed next :to="'/' + currentSearchType + '/?' + [searchTitle ? 'title=' + searchTitle : null, searchCategory ? 'type=' + searchCategory : null, searchLocation ? 'location=' + searchLocation : null].join('&')" class="submit-button font-weight-bold" color="error" height="40">
                 Search &nbsp;
                 <v-icon>mdi-database-search</v-icon>
               </v-btn>
